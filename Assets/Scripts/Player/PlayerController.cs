@@ -11,15 +11,12 @@ public class PlayerController : MonoBehaviour {
 	public bool grounded;
 	//grab the players rigidbody
 	Rigidbody2D playerBody;
-//	//get the players starting x position 
-//	float startX;
 	//is the player dead
 	bool dead = false;
 	//grab the animator
 	Animator anim;
 	//the players collider
 	CircleCollider2D playerCollider;
-
 
 	//complex jump shit
 	public float downforce;
@@ -35,7 +32,6 @@ public class PlayerController : MonoBehaviour {
 	void Start(){
 		playerCollider = GetComponent<CircleCollider2D> ();
 		playerCollider.enabled = true;
-//		startX = transform.position.x;
 		playerBody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 	}
@@ -46,10 +42,8 @@ public class PlayerController : MonoBehaviour {
 		if (dead) {
 			return;
 		}
-		//this stops the player from drifting back
-//		if (grounded) {
-//			transform.position = new Vector3 (startX, transform.position.y, transform.position.z);
-//		}
+
+
 		//check for ground
 		grounded = (Physics2D.OverlapCircle (new Vector2 (transform.position.x, transform.position.y - 0.9f), 0.09f, groundLayers)
 		            ||
@@ -77,7 +71,6 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			JumpButtonUp();
 		}
-
 	}
 
 	public void Jump(){
@@ -110,6 +103,9 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll){
 		if (coll.gameObject.tag == "Obsticle" && !dead) {
 			Die ();
+		}
+		if (coll.gameObject.name == "EndTrigger") {
+			gameController.EndGame(false);
 		}
 	}
 
