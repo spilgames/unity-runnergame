@@ -74,6 +74,10 @@ public class PlayerController : MonoBehaviour {
 			Jump();
 		}
 
+		if (Input.GetKeyUp (KeyCode.Space)) {
+			JumpButtonUp();
+		}
+
 	}
 
 	public void Jump(){
