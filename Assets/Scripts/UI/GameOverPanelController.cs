@@ -8,7 +8,7 @@ public class GameOverPanelController : MonoBehaviour {
 	//the text that fills the game over panel
 	public Text gameOverInfo;
 
-	void Start(){
+	void OnEnable(){
 		gameOverInfo.text = gameController.playerDistancePercent.ToString ("F0") + "%";
 	}
 

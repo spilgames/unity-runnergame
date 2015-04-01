@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour {
 	public bool grounded;
 	//grab the players rigidbody
 	Rigidbody2D playerBody;
-	//get the players starting x position 
-	float startX;
+//	//get the players starting x position 
+//	float startX;
 	//is the player dead
 	bool dead = false;
 	//grab the animator
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 	void Start(){
 		playerCollider = GetComponent<CircleCollider2D> ();
 		playerCollider.enabled = true;
-		startX = transform.position.x;
+//		startX = transform.position.x;
 		playerBody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 	}
@@ -47,9 +47,9 @@ public class PlayerController : MonoBehaviour {
 			return;
 		}
 		//this stops the player from drifting back
-		if (grounded) {
-			transform.position = new Vector3 (startX, transform.position.y, transform.position.z);
-		}
+//		if (grounded) {
+//			transform.position = new Vector3 (startX, transform.position.y, transform.position.z);
+//		}
 		//check for ground
 		grounded = (Physics2D.OverlapCircle (new Vector2 (transform.position.x, transform.position.y - 0.9f), 0.09f, groundLayers)
 		            ||
@@ -89,7 +89,19 @@ public class PlayerController : MonoBehaviour {
 			isKeyUpHappened = true;
 		}
 	}
-	
+
+	//reset the player
+	public void ResetPlayer(){
+		transform.rotation = gameController.playerStartPosition.rotation;
+		playerBody.fixedAngle = true;
+		playerBody.drag = 0;
+		playerCollider.enabled = true;
+		playerBody.velocity = Vector2.zero;
+		dead = false;
+		transform.position = gameController.playerStartPosition.position;
+		anim.SetBool ("Death",false);
+	}
+
 	//detect obsticles and die
 	void OnTriggerEnter2D(Collider2D coll){
 		if (coll.gameObject.tag == "Obsticle" && !dead) {
@@ -100,7 +112,7 @@ public class PlayerController : MonoBehaviour {
 	//die
 	void Die(){
 		dead = true;
-		anim.SetTrigger ("Death");
+		anim.SetBool ("Death",true);
 		playerBody.fixedAngle = false;
 		playerBody.velocity = Vector2.zero;
 		if (grounded) {

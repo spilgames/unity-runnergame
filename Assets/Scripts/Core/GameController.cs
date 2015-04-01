@@ -9,6 +9,12 @@ public class GameController : MonoBehaviour {
 	//the UI controller
 	public static MainUIController mainUI;
 
+	//starting positions for retrying the level
+	public Transform playerStartPosition;
+	public Transform movingStuffStartPosition;
+	public GameObject movingStuff;
+	public PlayerController player;
+
 	//how far through the level did the player get
 	public Transform levelStart;
 	public Transform levelEnd;
@@ -32,7 +38,14 @@ public class GameController : MonoBehaviour {
 		mainUI.UpdateUI ();
 	}
 
+	public void NewGame(){
+		movingStuff.transform.position = movingStuffStartPosition.position;
+		player.ResetPlayer ();
+		gameSpeed = 9.2f;
+		levelState = LevelState.Playing;
+		mainUI.UpdateUI ();
 
+	}
 
 	//end the game on completion or on player death
 	public void EndGame(bool died){
