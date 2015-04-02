@@ -4,10 +4,12 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
 	//speed that the platforms move
-	public static float gameSpeed = 9.2f;
+	public static float gameSpeed = 0;
 
 	//the UI controller
 	public static MainUIController mainUI;
+
+	public int characterSelected;
 
 	//starting positions for retrying the level
 	public Transform playerStartPosition;
@@ -23,6 +25,7 @@ public class GameController : MonoBehaviour {
 	public float playerDistancePercent;
 	//the different states of a level
 	public enum LevelState{
+		Character,
 		Playing,
 		Died,
 		Complete
@@ -31,20 +34,24 @@ public class GameController : MonoBehaviour {
 
 
 	void Start(){
-		gameSpeed = 9.2f;
 		Application.targetFrameRate = 60;
 		mainUI = GameObject.Find ("MainUI").GetComponent<MainUIController> ();
-		levelState = LevelState.Playing;
+		levelState = LevelState.Character;
 		mainUI.UpdateUI ();
 	}
 
-	public void NewGame(){
+	public void NewGame(int character){
+		characterSelected = character;
+		player.anim.SetInteger ("Animal",characterSelected);
 		movingStuff.transform.position = movingStuffStartPosition.position;
 		player.ResetPlayer ();
 		gameSpeed = 9.2f;
 		levelState = LevelState.Playing;
 		mainUI.UpdateUI ();
 
+	}
+	public void PlayAgain(){
+		NewGame (characterSelected);
 	}
 
 	//end the game on completion or on player death

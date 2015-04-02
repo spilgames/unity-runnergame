@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	//is the player dead
 	bool dead = false;
 	//grab the animator
-	Animator anim;
+	public Animator anim;
 	//the players collider
 	CircleCollider2D playerCollider;
 
@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			JumpButtonUp();
 		}
+		if (!dead && transform.position.x < gameController.playerStartPosition.position.x - 0.1f) {
+			Die(false);
+		}
 	}
 
 	public void Jump(){
@@ -102,7 +105,11 @@ public class PlayerController : MonoBehaviour {
 	//detect obsticles and die
 	void OnTriggerEnter2D(Collider2D coll){
 		if (coll.gameObject.tag == "Obsticle" && !dead) {
-			Die ();
+			if(coll.gameObject.name == "sea"){
+				Die (true);
+			}else{
+				Die (false);
+			}
 		}
 		if (coll.gameObject.name == "EndTrigger") {
 			gameController.EndGame(false);
@@ -110,26 +117,24 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//die
-	void Die(){
+	void Die(bool water){
 		dead = true;
 		anim.SetBool ("Death",true);
 		playerBody.fixedAngle = false;
-		playerBody.velocity = Vector2.zero;
-		if (grounded) {
-			playerBody.AddForce (new Vector2 (15, 50), ForceMode2D.Impulse);
-		} else {
-			playerBody.AddForce (new Vector2 (15, 20), ForceMode2D.Impulse);
+		if (!water) {
+			playerBody.velocity = Vector2.zero;
+			if (grounded) {
+				playerBody.AddForce (new Vector2 (15, 50), ForceMode2D.Impulse);
+			} else {
+				playerBody.AddForce (new Vector2 (15, 20), ForceMode2D.Impulse);
+			}
 		}
-		playerBody.AddTorque (-100);
+		playerBody.AddTorque (-200);
 		playerBody.drag = 1;
-		StartCoroutine ("Death");
 		playerCollider.enabled = false;
-	}
-
-	IEnumerator Death(){
 		gameController.playerDistance = transform.position.x;
-		yield return new WaitForSeconds(1);
 		gameController.EndGame (true);
 	}
+	
 
 }
