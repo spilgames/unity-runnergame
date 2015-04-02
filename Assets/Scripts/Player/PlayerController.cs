@@ -135,6 +135,5 @@ public class PlayerController : MonoBehaviour {
 		gameController.playerDistance = transform.position.x;
 		gameController.EndGame (true);
 	}
-	
 
 }
