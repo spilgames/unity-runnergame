@@ -10,8 +10,7 @@ public class MainUIController : MonoBehaviour {
 	public GameObject gameOverPanel;
 	public GameObject levelCompletePanel;
 
-
-
+	
 
 	public void UpdateUI(){
 		if (GameController.levelState == GameController.LevelState.Character) {
