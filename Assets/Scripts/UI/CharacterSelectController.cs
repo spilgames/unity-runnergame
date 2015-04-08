@@ -24,6 +24,7 @@ public class CharacterSelectController : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
+		GameController.Load ();
 		GameController.charactersUnlocked [0] = true;
 		UpdateButtonImages ();
 		StartCoroutine ("CheckForRewardedAd");
@@ -53,8 +54,6 @@ public class CharacterSelectController : MonoBehaviour {
 			}
 		}
 	}
-
-
 	
 	public void ShowLockedCharacterScreen(int character){
 		lockedCharacterNumber = character;
