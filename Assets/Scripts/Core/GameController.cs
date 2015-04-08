@@ -1,14 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.Advertisements;
+using UnityEngine.UI;
 public class GameController : MonoBehaviour {
+
+	//unity ads ids
+	public string unityAdsIos;
+	public string unityAdsAndroid;
 
 	//speed that the platforms move
 	public static float gameSpeed = 0;
 
+	//coins
+	public static int playerCoins;
+	//the coins the player has
+	public static Text coinsText;
+
 	//the UI controller
 	public static MainUIController mainUI;
-
+	//character controll
+	public static bool[] charactersUnlocked = new bool[24];
 	public int characterSelected;
 
 	//starting positions for retrying the level
@@ -34,6 +45,16 @@ public class GameController : MonoBehaviour {
 
 
 	void Start(){
+		coinsText = GameObject.Find ("CoinsText").GetComponent<Text> ();
+#if UNITY_ANDROID
+		Advertisement.Initialize (unityAdsAndroid);
+#endif
+#if UNITY_IOS
+		Advertisement.Initialize (unityAdsIos);
+#endif
+
+		Load ();
+		UpdateCoinsText ();
 		Application.targetFrameRate = 60;
 		mainUI = GameObject.Find ("MainUI").GetComponent<MainUIController> ();
 		levelState = LevelState.Character;
@@ -41,14 +62,17 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void NewGame(int character){
-		characterSelected = character;
-		player.anim.SetInteger ("Animal",characterSelected);
-		movingStuff.transform.position = movingStuffStartPosition.position;
-		player.ResetPlayer ();
-		gameSpeed = 9.2f;
-		levelState = LevelState.Playing;
-		mainUI.UpdateUI ();
-
+		if (charactersUnlocked [character]) {
+			characterSelected = character;
+			player.anim.SetInteger ("Animal", characterSelected);
+			movingStuff.transform.position = movingStuffStartPosition.position;
+			player.ResetPlayer ();
+			gameSpeed = 9.2f;
+			levelState = LevelState.Playing;
+			mainUI.UpdateUI ();
+		} else {
+			mainUI.characterSelect.ShowLockedCharacterScreen(character);
+		}
 	}
 	public void PlayAgain(){
 		NewGame (characterSelected);
@@ -67,4 +91,44 @@ public class GameController : MonoBehaviour {
 			mainUI.UpdateUI();
 		}
 	}
+
+	public static void UpdateCoinsText(){
+		coinsText.text = playerCoins.ToString();
+	}
+
+
+	public static void Save(){
+		PlayerPrefs.SetInt ("coins",playerCoins);
+		for (int i = 0; i < charactersUnlocked.Length; i++) {
+			if(charactersUnlocked[i]){
+				PlayerPrefs.SetInt("charactersUnlocked" + i.ToString(),1);
+			}else{
+				PlayerPrefs.SetInt("charactersUnlocked" + i.ToString(),0);
+			}
+		}
+	}
+
+	public static void Load(){
+		playerCoins = PlayerPrefs.GetInt ("coins",0);
+		for (int i = 0; i < charactersUnlocked.Length; i++) {
+			if(PlayerPrefs.GetInt("charactersUnlocked" + i.ToString(),0) == 1){
+				charactersUnlocked[i] = true;
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

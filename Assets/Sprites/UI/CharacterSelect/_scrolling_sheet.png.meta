@@ -1,0 +1,880 @@
+fileFormatVersion: 2
+guid: d810f352098f543b9bce0be0d43c9df2
+timeCreated: 1428069225
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: _scrolling_sheet_0
+    21300002: _scrolling_sheet_1
+    21300004: _scrolling_sheet_2
+    21300006: _scrolling_sheet_3
+    21300008: _scrolling_sheet_4
+    21300010: _scrolling_sheet_5
+    21300012: _scrolling_sheet_6
+    21300014: _scrolling_sheet_7
+    21300016: _scrolling_sheet_8
+    21300018: _scrolling_sheet_9
+    21300020: _scrolling_sheet_10
+    21300022: _scrolling_sheet_11
+    21300024: _scrolling_sheet_12
+    21300026: _scrolling_sheet_13
+    21300028: _scrolling_sheet_14
+    21300030: _scrolling_sheet_15
+    21300032: _scrolling_sheet_16
+    21300034: _scrolling_sheet_17
+    21300036: _scrolling_sheet_18
+    21300038: _scrolling_sheet_19
+    21300040: _scrolling_sheet_20
+    21300042: _scrolling_sheet_21
+    21300044: _scrolling_sheet_22
+    21300046: _scrolling_sheet_23
+    21300048: _scrolling_sheet_24
+    21300050: _scrolling_sheet_25
+    21300052: _scrolling_sheet_26
+    21300054: _scrolling_sheet_27
+    21300056: _scrolling_sheet_28
+    21300058: _scrolling_sheet_29
+    21300060: _scrolling_sheet_30
+    21300062: _scrolling_sheet_31
+    21300064: _scrolling_sheet_32
+    21300066: _scrolling_sheet_33
+    21300068: _scrolling_sheet_34
+    21300070: _scrolling_sheet_35
+    21300072: _scrolling_sheet_36
+    21300074: _scrolling_sheet_37
+    21300076: _scrolling_sheet_38
+    21300078: _scrolling_sheet_39
+    21300080: _scrolling_sheet_40
+    21300082: _scrolling_sheet_41
+    21300084: _scrolling_sheet_42
+    21300086: _scrolling_sheet_43
+    21300088: _scrolling_sheet_44
+    21300090: _scrolling_sheet_45
+    21300092: _scrolling_sheet_46
+    21300094: _scrolling_sheet_47
+    21300096: _scrolling_sheet_48
+    21300098: _scrolling_sheet_49
+    21300100: _scrolling_sheet_50
+    21300102: _scrolling_sheet_51
+    21300104: _scrolling_sheet_52
+    21300106: _scrolling_sheet_53
+    21300108: _scrolling_sheet_54
+    21300110: _scrolling_sheet_55
+    21300112: _scrolling_sheet_56
+    21300114: _scrolling_sheet_57
+    21300116: _scrolling_sheet_58
+    21300118: _scrolling_sheet_59
+    21300120: _scrolling_sheet_60
+    21300122: _scrolling_sheet_61
+    21300124: _scrolling_sheet_62
+    21300126: _scrolling_sheet_63
+    21300128: _scrolling_sheet_64
+    21300130: _scrolling_sheet_65
+    21300132: _scrolling_sheet_66
+    21300134: _scrolling_sheet_67
+    21300136: _scrolling_sheet_68
+    21300138: _scrolling_sheet_69
+    21300140: _scrolling_sheet_70
+    21300142: _scrolling_sheet_71
+    21300144: _scrolling_sheet_72
+    21300146: _scrolling_sheet_73
+    21300148: _scrolling_sheet_74
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 32
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: _scrolling_sheet_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 133
+        width: 32
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_1
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 133
+        width: 32
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 133
+        width: 32
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 116
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 116
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 116
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_6
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 116
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 116
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_8
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 116
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_9
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 116
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_10
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 116
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_11
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 116
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 101
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 101
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_14
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 101
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_15
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 101
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 101
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_17
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 101
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_18
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 101
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_19
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 101
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_20
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 101
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_21
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 85
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_22
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 85
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_23
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 85
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_24
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 85
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_25
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 85
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_26
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 85
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_27
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 85
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_28
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 85
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_29
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 85
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_30
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 69
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_31
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 69
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_32
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 69
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_33
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 69
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_34
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 69
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_35
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 69
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_36
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 69
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_37
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 69
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_38
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 69
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_39
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 52
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_40
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 52
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_41
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 52
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_42
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 52
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_43
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 52
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_44
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 52
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_45
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 52
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_46
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 52
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_47
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 52
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_48
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 37
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_49
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 37
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_50
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 37
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_51
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 37
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_52
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 37
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_53
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 37
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_54
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 37
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_55
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 37
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_56
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 37
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_57
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_58
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 21
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_59
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_60
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_61
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 21
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_62
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_63
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_64
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 21
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_65
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_66
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_67
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 5
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_68
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_69
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_70
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 5
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_71
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_72
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_73
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 5
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _scrolling_sheet_74
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

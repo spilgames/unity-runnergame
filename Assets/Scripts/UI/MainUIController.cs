@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class MainUIController : MonoBehaviour {
+
 
 
 	//the components of the UI
@@ -10,31 +11,28 @@ public class MainUIController : MonoBehaviour {
 	public GameObject gameOverPanel;
 	public GameObject levelCompletePanel;
 
-	
+	public CharacterSelectController characterSelect;
 
 	public void UpdateUI(){
 		if (GameController.levelState == GameController.LevelState.Character) {
-			characterSelectPanel.SetActive(true);
+			characterSelectPanel.SetActive (true);
 		} else {
-			characterSelectPanel.SetActive(false);
+			characterSelectPanel.SetActive (false);
 		}
 		if (GameController.levelState == GameController.LevelState.Playing) {
-			inGamePanel.SetActive(true);
+			inGamePanel.SetActive (true);
 		} else {
-			inGamePanel.SetActive(false);
+			inGamePanel.SetActive (false);
 		}
 		if (GameController.levelState == GameController.LevelState.Died) {
-			gameOverPanel.SetActive(true);
+			gameOverPanel.SetActive (true);
 		} else {
-			gameOverPanel.SetActive(false);
+			gameOverPanel.SetActive (false);
 		}
 		if (GameController.levelState == GameController.LevelState.Complete) {
-			levelCompletePanel.SetActive(true);
+			levelCompletePanel.SetActive (true);
 		} else {
-			levelCompletePanel.SetActive(false);
+			levelCompletePanel.SetActive (false);
 		}
 	}
-
-
-
 }
