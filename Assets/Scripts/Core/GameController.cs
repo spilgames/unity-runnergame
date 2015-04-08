@@ -46,13 +46,17 @@ public class GameController : MonoBehaviour {
 
 	void Start(){
 		coinsText = GameObject.Find ("CoinsText").GetComponent<Text> ();
+		if (Advertisement.isSupported) {
+			Advertisement.allowPrecache = true;
 #if UNITY_ANDROID
 		Advertisement.Initialize (unityAdsAndroid);
 #endif
 #if UNITY_IOS
 		Advertisement.Initialize (unityAdsIos);
 #endif
-
+		} else {
+			Debug.Log("Platform not supported");
+		}
 		Load ();
 		UpdateCoinsText ();
 		Application.targetFrameRate = 60;
