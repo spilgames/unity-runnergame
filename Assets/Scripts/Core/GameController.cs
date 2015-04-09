@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
 	//the UI controller
 	public static MainUIController mainUI;
 	//character controll
-	public static bool[] charactersUnlocked = new bool[24];
+	public static bool[] charactersUnlocked = new bool[28];
 	public int characterSelected;
 
 	//starting positions for retrying the level
