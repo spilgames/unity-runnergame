@@ -96,7 +96,7 @@ public class CharacterSelectController : MonoBehaviour {
 
 	public void RewardPlayer(){
 		RewardedSuccessPanel.SetActive(true);
-		GameController.playerCoins += 100;
+		GameController.playerCoins += 300;
 		PlayerPrefs.SetInt ("coins",GameController.playerCoins);
 		GameController.UpdateCoinsText ();
 		RewardedPanel.SetActive (false);
