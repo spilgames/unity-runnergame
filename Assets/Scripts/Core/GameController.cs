@@ -43,6 +43,11 @@ public class GameController : MonoBehaviour {
 	}
 	public static LevelState levelState;
 
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.C)) {
+			playerCoins += 1000;
+		}
+	}
 
 	void Start(){
 		coinsText = GameObject.Find ("CoinsText").GetComponent<Text> ();
