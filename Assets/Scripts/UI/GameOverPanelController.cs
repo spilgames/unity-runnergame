@@ -27,12 +27,9 @@ public class GameOverPanelController : MonoBehaviour {
 	}
 
 	IEnumerator AddUpCoins(int earned){
-		for (int i = 0; i< earned; i++) {
-			GameController.playerCoins ++;
-			GameController.UpdateCoinsText ();
-			coinsEarnedText.text = (i +1).ToString ();
-			yield return new WaitForSeconds(0.2f);
-		}
+		GameController.playerCoins += earned;
+		GameController.UpdateCoinsText ();
+		coinsEarnedText.text = earned.ToString ();
 		GameController.Save ();
 		yield return new WaitForSeconds(1);
 		homeButton.SetActive (true);
@@ -48,6 +45,9 @@ public class GameOverPanelController : MonoBehaviour {
 	public void MainMenu(){
 		Application.LoadLevel (0);
 	}
-	
+
+	public void LoadLevelSelect(){
+		Application.LoadLevel (1);
+	}
 
 }

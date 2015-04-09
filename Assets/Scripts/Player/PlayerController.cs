@@ -113,6 +113,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (coll.gameObject.name == "EndTrigger") {
 			gameController.EndGame(false);
+			coll.gameObject.GetComponent<EndTriggerFX>().EndFX();
 		}
 	}
 

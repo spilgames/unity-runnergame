@@ -37,7 +37,7 @@ public class CharacterSelectController : MonoBehaviour {
 	}
 
 	IEnumerator CheckForRewardedAd(){
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (4);
 		if (Advertisement.isReady ("rewardedVideoZone")) {
 			rewardedButton.SetActive(true);
 		}

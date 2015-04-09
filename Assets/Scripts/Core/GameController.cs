@@ -129,18 +129,4 @@ public class GameController : MonoBehaviour {
 	public void ReloadScene(){
 		Application.LoadLevel (Application.loadedLevel);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
