@@ -96,6 +96,17 @@ public class GameController : MonoBehaviour {
 			levelState = LevelState.Died;
 			mainUI.UpdateUI ();
 		} else {
+
+			switch(Application.loadedLevel){
+			case 2:
+				PlayerPrefs.SetInt("level2",1);
+				break;
+			case 3:
+				PlayerPrefs.SetInt("level3",1);
+				break;
+			default:
+				break;
+			}
 			levelState = LevelState.Complete;
 			mainUI.UpdateUI();
 		}
