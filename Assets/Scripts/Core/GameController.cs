@@ -50,6 +50,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Start(){
+		if (PlayerPrefs.GetInt ("Mute", 0) == 1) {
+			AudioListener.pause = true;
+		} else {
+			AudioListener.pause = false;
+		}
 		coinsText = GameObject.Find ("CoinsText").GetComponent<Text> ();
 		if (Advertisement.isSupported) {
 			Advertisement.allowPrecache = true;

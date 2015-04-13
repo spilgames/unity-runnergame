@@ -10,8 +10,17 @@ public class MainUIController : MonoBehaviour {
 	public GameObject inGamePanel;
 	public GameObject gameOverPanel;
 	public GameObject levelCompletePanel;
+	public GameObject tutorialPanel;
 
 	public CharacterSelectController characterSelect;
+
+	void Start(){
+		if (PlayerPrefs.GetInt ("Tutorial", 0) == 0) {
+			tutorialPanel.SetActive(true);
+			PlayerPrefs.SetInt("Tutorial",1);
+		}
+	}
+
 
 	public void UpdateUI(){
 		if (GameController.levelState == GameController.LevelState.Character) {
@@ -35,4 +44,9 @@ public class MainUIController : MonoBehaviour {
 			levelCompletePanel.SetActive (false);
 		}
 	}
+
+	public void CloseTutorialPanel(){
+		tutorialPanel.SetActive (false);
+	}
+
 }
