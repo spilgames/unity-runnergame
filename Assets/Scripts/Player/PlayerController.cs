@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			JumpButtonUp();
 		}
-		if (!dead && transform.position.x < gameController.playerStartPosition.position.x - 0.2f) {
+		if (!dead && transform.position.x < gameController.playerStartPosition.position.x - 0.2f ) {
 			Die(false);
 		}
 	}
