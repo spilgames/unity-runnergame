@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour {
 	public string unityAdsIos;
 	public string unityAdsAndroid;
 
+	//the rate me popup
+	public GameObject rateUsScreen;
+
 	//speed that the platforms move
 	public static float gameSpeed = 0;
 
@@ -108,6 +111,12 @@ public class GameController : MonoBehaviour {
 				break;
 			case 3:
 				PlayerPrefs.SetInt("level3",1);
+				break;
+			case 4:
+				if(PlayerPrefs.GetInt("rate", 0) == 0){
+					rateUsScreen.SetActive(true);
+					PlayerPrefs.SetInt("rate",1);
+				}
 				break;
 			default:
 				break;
