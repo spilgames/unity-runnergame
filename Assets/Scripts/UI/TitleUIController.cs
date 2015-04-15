@@ -4,6 +4,7 @@ using System.Collections;
 public class TitleUIController : MonoBehaviour {
 
 	public GameObject infoPanel;
+	public GameObject optionsPanel;
 
 	public void OpenLevelSelect(){
 		Application.LoadLevel (1);
@@ -17,6 +18,18 @@ public class TitleUIController : MonoBehaviour {
 		}
 	}
 
+	public void ToggleOptionsPanel(){
+		if (optionsPanel.activeInHierarchy) {
+			optionsPanel.SetActive (false);
+		} else {
+			optionsPanel.SetActive(true);
+		}
+	}
+
+	public void QuitGame(){
+		Application.Quit ();
+	}
+
 	public void Mute(){
 	
 		if (PlayerPrefs.GetInt ("Mute", 0) == 0) {
@@ -28,6 +41,9 @@ public class TitleUIController : MonoBehaviour {
 		}
 
 	}
+
+
+
 
 }
 
