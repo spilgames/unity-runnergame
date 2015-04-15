@@ -2,9 +2,12 @@
 using System.Collections;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
+using ChartboostSDK;
 public class GameController : MonoBehaviour {
 
 	public GoogleAnalyticsV3 analytics;
+
+	int gamePlaysThisSession;
 
 	//unity ads ids
 	public string unityAdsIos;
@@ -82,6 +85,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void NewGame(int character){
+		gamePlaysThisSession ++;
 		analytics.LogScreen (Application.loadedLevelName);
 		if (charactersUnlocked [character]) {
 			characterSelected = character;
@@ -103,11 +107,13 @@ public class GameController : MonoBehaviour {
 	public void EndGame(bool died){
 		gameSpeed = 0;
 		if (died) {
+			if(gamePlaysThisSession != 0 && gamePlaysThisSession % 6 == 0 && Chartboost.hasInterstitial(CBLocation.GameOver)){
+				Chartboost.showInterstitial(CBLocation.GameOver);
+			}
 			levelLength = levelEnd.position.x - levelStart.position.x;
 			playerDistancePercent = ((playerDistance - levelStart.position.x) / levelLength) * 100; 
 			levelState = LevelState.Died;
 			mainUI.UpdateUI ();
-
 			EventHitBuilder endGameEvent = new EventHitBuilder();
 			endGameEvent.SetEventAction("Death");
 			endGameEvent.SetEventCategory("Player Event");

@@ -106,7 +106,7 @@ public class CharacterSelectController : MonoBehaviour {
 			EventHitBuilder unlockEvent = new EventHitBuilder();
 			unlockEvent.SetEventAction("CharacterUnlock");
 			unlockEvent.SetEventCategory("Player Event");
-			unlockEvent.SetEventLabel(Application.loadedLevelName);
+			unlockEvent.SetEventLabel(Application.loadedLevelName + " " + GameController.playerCoins.ToString());
 			unlockEvent.SetEventValue(1);
 			analytics.LogEvent(unlockEvent);
 		}

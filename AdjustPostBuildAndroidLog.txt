@@ -1,0 +1,8 @@
+Android plugin path: /Users/richardelms/GameDev/unity-runnergame/Assets/Plugins/Android/
+has adjust install referrer receiver?: False
+has internet permission?: False
+has wifi permission?: False
+Android manifest used in unity did not had all the changes adjust SDK needs. Please build again the package.
+added adjust install referrer receiver
+added internet permission
+added access wifi permission
