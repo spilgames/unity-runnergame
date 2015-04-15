@@ -7,6 +7,8 @@ public class CharacterSelectController : MonoBehaviour {
 	//the animal buttons 
 	public Image[] buttons;
 
+	public GoogleAnalyticsV3 analytics;
+
 	//black out color for locked animals
 	public Color blackOut;
 	public Color fullColor;
@@ -21,6 +23,10 @@ public class CharacterSelectController : MonoBehaviour {
 
 	//what character did they try to use?
 	int lockedCharacterNumber;
+
+	void Start(){
+		analytics = GameObject.Find ("GAv3").GetComponent<GoogleAnalyticsV3> ();
+	}
 
 	// Use this for initialization
 	void OnEnable () {
@@ -56,6 +62,12 @@ public class CharacterSelectController : MonoBehaviour {
 	}
 	
 	public void ShowLockedCharacterScreen(int character){
+		EventHitBuilder unlockEvent = new EventHitBuilder();
+		unlockEvent.SetEventAction("Viewed Locked Character");
+		unlockEvent.SetEventCategory("Player Event");
+		unlockEvent.SetEventLabel(Application.loadedLevelName);
+		unlockEvent.SetEventValue(1);
+		analytics.LogEvent(unlockEvent);
 		lockedCharacterNumber = character;
 		characterLockedPanel.SetActive (true);
 	}
@@ -91,6 +103,12 @@ public class CharacterSelectController : MonoBehaviour {
 			UpdateButtonImages();
 			GameController.Save();
 			CloseLockedCharactersScreen();
+			EventHitBuilder unlockEvent = new EventHitBuilder();
+			unlockEvent.SetEventAction("CharacterUnlock");
+			unlockEvent.SetEventCategory("Player Event");
+			unlockEvent.SetEventLabel(Application.loadedLevelName);
+			unlockEvent.SetEventValue(1);
+			analytics.LogEvent(unlockEvent);
 		}
 	}
 

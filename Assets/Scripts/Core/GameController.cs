@@ -4,6 +4,8 @@ using UnityEngine.Advertisements;
 using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
+	public GoogleAnalyticsV3 analytics;
+
 	//unity ads ids
 	public string unityAdsIos;
 	public string unityAdsAndroid;
@@ -53,6 +55,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Start(){
+		analytics = GameObject.Find ("GAv3").GetComponent<GoogleAnalyticsV3> ();
 		if (PlayerPrefs.GetInt ("Mute", 0) == 1) {
 			AudioListener.pause = true;
 		} else {
@@ -79,6 +82,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void NewGame(int character){
+		analytics.LogScreen (Application.loadedLevelName);
 		if (charactersUnlocked [character]) {
 			characterSelected = character;
 			player.anim.SetInteger ("Animal", characterSelected);
@@ -103,6 +107,13 @@ public class GameController : MonoBehaviour {
 			playerDistancePercent = ((playerDistance - levelStart.position.x) / levelLength) * 100; 
 			levelState = LevelState.Died;
 			mainUI.UpdateUI ();
+
+			EventHitBuilder endGameEvent = new EventHitBuilder();
+			endGameEvent.SetEventAction("Death");
+			endGameEvent.SetEventCategory("Player Event");
+			endGameEvent.SetEventLabel(Application.loadedLevelName);
+			endGameEvent.SetEventValue(1);
+			analytics.LogEvent(endGameEvent);
 		} else {
 
 			switch(Application.loadedLevel){
