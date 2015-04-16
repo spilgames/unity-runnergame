@@ -55,7 +55,7 @@ public class AdjustEditor : MonoBehaviour {
 		#if UNITY_IOS
 		AdjustEditor.iOSBuildPath = EditorUtility.OpenFolderPanel(
 			title: "iOs build path",
-			folder: EditorUserBuildSettings.GetBuildLocation(BuildTarget.iPhone),
+			folder: EditorUserBuildSettings.GetBuildLocation(BuildTarget.iOS),
 			defaultName: "");
 		if (AdjustEditor.iOSBuildPath == "") {
 			UnityEngine.Debug.Log("iOS build path reset to default path");
