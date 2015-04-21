@@ -96,8 +96,8 @@ public class CharacterSelectController : MonoBehaviour {
 	}
 
 	public void UnlockCharacter(){
-		if (GameController.playerCoins >= 200) {
-			GameController.playerCoins -= 200;
+		if (GameController.playerCoins >= 400) {
+			GameController.playerCoins -= 400;
 			GameController.UpdateCoinsText();
 			GameController.charactersUnlocked[lockedCharacterNumber] = true;
 			UpdateButtonImages();
