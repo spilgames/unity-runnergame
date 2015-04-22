@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour {
 	public float jumpStart = -1;
 	private bool isKeyUpHappened = false;
 
+	public AudioSource hitSound;
+	public AudioSource jumpSound;
 
 	//initialise the player
 	void Start(){
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Jump(){
 		if (grounded) {
+			jumpSound.Play();
 			playerBody.AddForce (Vector3.up * JumpSpeed,ForceMode2D.Impulse);
 			isJumping = true;
 			isKeyUpHappened = false;
@@ -122,6 +125,7 @@ public class PlayerController : MonoBehaviour {
 		dead = true;
 		anim.SetBool ("Death",true);
 		playerBody.fixedAngle = false;
+		hitSound.Play ();
 		if (!water) {
 			playerBody.velocity = Vector2.zero;
 			if (grounded) {
