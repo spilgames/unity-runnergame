@@ -1,3 +1,4 @@
-Android plugin path: /Users/richardelms/Desktop/SPRONGIOS/Plugins/Android/
-Used default Android manifest file from unity. Please build again the package to include the changes for adjust SDK
-[Errno 2] No such file or directory: '/Users/richardelms/Desktop/SPRONGIOS/Plugins/Android/AdjustAndroidManifest.xml'
+Android plugin path: /Users/richardelms/GameDev/unity-runnergame/Assets/Plugins/Android/
+has adjust install referrer receiver?: True
+has internet permission?: True
+has wifi permission?: True

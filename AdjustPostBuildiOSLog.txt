@@ -1,22 +1,3 @@
 Xcode sdk path: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk
-Unity3d Xcode project path: /Users/richardelms/Desktop/SPRONGIOS/Unity-iPhone.xcodeproj/project.pbxproj
+Unity3d Xcode project path: /Users/richardelms/Dropbox/SPRONG.apk/Unity-iPhone.xcodeproj/project.pbxproj
 framework path: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/
-added adSupport framework
-added iAd framework
-added ARC flag to file AdjustUnity.mm
-added ARC flag to file Adjust.m
-added ARC flag to file AIActivityState.m
-added ARC flag to file AIPackageBuilder.m
-added ARC flag to file AIActivityHandler.m
-added ARC flag to file UIDevice+AIAdditions.m
-added ARC flag to file AILogger.m
-added ARC flag to file AIResponseData.m
-added ARC flag to file AIAdjustFactory.m
-added ARC flag to file AITimer.m
-added ARC flag to file AIPackageHandler.m
-added ARC flag to file AIActivityKind.m
-added ARC flag to file NSString+AIAdditions.m
-added ARC flag to file AIRequestHandler.m
-added ARC flag to file AIUtil.m
-added ARC flag to file AIActivityPackage.m
-added ARC flag to file NSData+AIAdditions.m
