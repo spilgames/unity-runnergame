@@ -1,7 +1,17 @@
-<?xml version="1.0" ?><manifest android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" android:versionCode="1" android:versionName="1.0" package="com.unity3d.player" xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" android:versionCode="1" android:versionName="1.0" package="com.unity3d.player" xmlns:android="http://schemas.android.com/apk/res/android">
   <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
-  <uses-sdk android:minSdkVersion="9"/>
+  <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="20"/>
   <application android:debuggable="true" android:icon="@drawable/app_icon" android:label="@string/app_name">
+      <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+      <receiver android:name="com.spilgames.pushnotificationlibrary.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <category android:name="com.spilgames.pushnotificationlibrary" />
+      </intent-filter>
+    </receiver>
+    <service android:name="com.spilgames.pushnotificationlibrary.GcmMessageHandler" />
+    <activity android:name="com.spilgames.pushnotificationlibrary.StatActivity" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:label="@string/app_name" android:launchMode="singleTask" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     <activity android:label="@string/app_name" android:name="com.unity3d.player.UnityPlayerNativeActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -15,4 +25,11 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
         </receiver></application>
-<uses-permission android:name="android.permission.INTERNET"/><uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/></manifest>
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<uses-permission android:name="com.spilgames.sprong.permission.C2D_MESSAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.VIBRATE" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+</manifest>
