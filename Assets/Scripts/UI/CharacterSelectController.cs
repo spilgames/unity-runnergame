@@ -4,9 +4,17 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 public class CharacterSelectController : MonoBehaviour {
 
+	//unity ads ids
+	public string unityAdsIos;
+	public string unityAdsAndroid;
+
 	//the animal buttons 
 	public Image[] buttons;
 
+	//the coins amountText
+	public Text coinsAmountText;
+
+	//the GAV3 prefab
 	public GoogleAnalyticsV3 analytics;
 
 	//black out color for locked animals
@@ -23,25 +31,35 @@ public class CharacterSelectController : MonoBehaviour {
 
 	//what character did they try to use?
 	int lockedCharacterNumber;
-
-	void Start(){
-		analytics = GameObject.Find ("GAv3").GetComponent<GoogleAnalyticsV3> ();
-	}
-
+	
 	// Use this for initialization
 	void OnEnable () {
-		GameController.Load ();
-		GameController.charactersUnlocked [0] = true;
+		#if UNITY_ANDROID
+		Advertisement.Initialize (unityAdsAndroid);
+		#endif
+		#if UNITY_IOS
+		Advertisement.Initialize (unityAdsIos);
+		#endif
+		//update the coins UI
+		coinsAmountText.text = PlayerPrefs.GetInt ("coins",0).ToString();
+		//load the status of unlocks so far
+		SprongData.LoadPlayerData ();
+		//make sure that at least the fist character is unlocked
+		SprongData.charactersUnlocked [0] = true;
+		//update the character images accordingly
 		UpdateButtonImages ();
+		//check to see if there are any ads avalible
 		StartCoroutine ("CheckForRewardedAd");
 	}
 
+	//reset stuff 
 	void OnDisable(){
 		rewardedButton.SetActive(false);
 		characterLockedPanel.SetActive (false);
 		StopCoroutine ("CheckForRewardedAd");
 	}
 
+	//check for a rewarded video
 	IEnumerator CheckForRewardedAd(){
 		yield return new WaitForSeconds (4);
 		if (Advertisement.isReady ("rewardedVideoZone")) {
@@ -49,33 +67,29 @@ public class CharacterSelectController : MonoBehaviour {
 		}
 	}
 
-	
 	//update the buttons if they are unlocked
 	void UpdateButtonImages(){
-		for (int i = 0; i < GameController.charactersUnlocked.Length; i ++) {
-			if(GameController.charactersUnlocked[i]){
+		for (int i = 0; i < SprongData.charactersUnlocked.Length; i ++) {
+			if(SprongData.charactersUnlocked[i]){
 				buttons[i].color = fullColor;
 			}else{
 				buttons[i].color = blackOut;
 			}
 		}
 	}
-	
+
+	//if a character is locked, show the locked character screen
 	public void ShowLockedCharacterScreen(int character){
-		EventHitBuilder unlockEvent = new EventHitBuilder();
-		unlockEvent.SetEventAction("Viewed Locked Character");
-		unlockEvent.SetEventCategory("Player Event");
-		unlockEvent.SetEventLabel(Application.loadedLevelName);
-		unlockEvent.SetEventValue(1);
-		analytics.LogEvent(unlockEvent);
 		lockedCharacterNumber = character;
 		characterLockedPanel.SetActive (true);
 	}
 
+	//close it after
 	public void CloseLockedCharactersScreen(){
 		characterLockedPanel.SetActive (false);
 	}
 
+	//offer a reward for watching an AD
 	public void TriggerRewardedOfferPanel(){
 		if (RewardedPanel.activeInHierarchy) {
 			RewardedPanel.SetActive (false);
@@ -84,6 +98,7 @@ public class CharacterSelectController : MonoBehaviour {
 		}
 	}
 
+	//play the AD
 	public void WatchVideo(){
 		Advertisement.Show("rewardedVideoZone", new ShowOptions {
 			pause = true,
@@ -95,37 +110,47 @@ public class CharacterSelectController : MonoBehaviour {
 		});
 	}
 
+	//unlock a character
 	public void UnlockCharacter(){
-		if (GameController.playerCoins >= 400) {
-			GameController.playerCoins -= 400;
-			GameController.UpdateCoinsText();
-			GameController.charactersUnlocked[lockedCharacterNumber] = true;
+		//if the player has enough coins
+		if (SprongData.playerCoins >= 400) {
+			//deduct the coins
+			SprongData.playerCoins -= 400;
+			//update the UI to reflect it
+			coinsAmountText.text = SprongData.playerCoins.ToString();
 			UpdateButtonImages();
-			GameController.Save();
+			//unlock the character
+			SprongData.charactersUnlocked[lockedCharacterNumber] = true;
+			//save the change
+			SprongData.SavePlayerData();
+			//close the panel
 			CloseLockedCharactersScreen();
-			EventHitBuilder unlockEvent = new EventHitBuilder();
-			unlockEvent.SetEventAction("CharacterUnlock");
-			unlockEvent.SetEventCategory("Player Event");
-			unlockEvent.SetEventLabel(Application.loadedLevelName + " " + GameController.playerCoins.ToString());
-			unlockEvent.SetEventValue(1);
-			analytics.LogEvent(unlockEvent);
 		}
 	}
 
+	//select the character, and if unlocked start the game with that character
+	public void StartGame(int character){
+		if (SprongData.charactersUnlocked [character]) {
+			SprongData.characterSelected = character;
+			Application.LoadLevel (PlayerPrefs.GetInt ("level", 0));
+		} else {
+			//if not unlocked, show the unlock character screen
+			ShowLockedCharacterScreen(character);
+		}
+	}
+
+	//reward the player after watching an AD
 	public void RewardPlayer(){
 		RewardedSuccessPanel.SetActive(true);
-		GameController.playerCoins += 300;
-		PlayerPrefs.SetInt ("coins",GameController.playerCoins);
-		GameController.UpdateCoinsText ();
+		SprongData.playerCoins += 300;
+		coinsAmountText.text = SprongData.playerCoins.ToString();
 		RewardedPanel.SetActive (false);
 		rewardedButton.SetActive (false);
 		StartCoroutine ("CheckForRewardedAd");
-		GameController.Save ();
+		SprongData.SavePlayerData ();
 	}
 
 	public void CloseRewardedSuccessPanel(){
 		RewardedSuccessPanel.SetActive(false);
 	}
-
-
 }

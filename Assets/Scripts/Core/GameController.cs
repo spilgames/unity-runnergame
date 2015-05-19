@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Advertisements;
 using UnityEngine.UI;
 using ChartboostSDK;
 public class GameController : MonoBehaviour {
@@ -19,16 +18,11 @@ public class GameController : MonoBehaviour {
 	//speed that the platforms move
 	public static float gameSpeed = 0;
 
-	//coins
-	public static int playerCoins;
 	//the coins the player has
 	public static Text coinsText;
 
 	//the UI controller
 	public static MainUIController mainUI;
-	//character controll
-	public static bool[] charactersUnlocked = new bool[28];
-	public int characterSelected;
 
 	//starting positions for retrying the level
 	public Transform playerStartPosition;
@@ -44,18 +38,12 @@ public class GameController : MonoBehaviour {
 	public float playerDistancePercent;
 	//the different states of a level
 	public enum LevelState{
-		Character,
 		Playing,
 		Died,
 		Complete
 	}
 	public static LevelState levelState;
 
-	void Update(){
-		if (Input.GetKeyDown (KeyCode.C)) {
-			playerCoins += 1000;
-		}
-	}
 
 	void Start(){
 		analytics = GameObject.Find ("GAv3").GetComponent<GoogleAnalyticsV3> ();
@@ -65,26 +53,14 @@ public class GameController : MonoBehaviour {
 			AudioListener.pause = false;
 		}
 		coinsText = GameObject.Find ("CoinsText").GetComponent<Text> ();
-		if (Advertisement.isSupported) {
-			Advertisement.allowPrecache = true;
-#if UNITY_ANDROID
-		Advertisement.Initialize (unityAdsAndroid);
-#endif
-#if UNITY_IOS
-		Advertisement.Initialize (unityAdsIos);
-#endif
-		} else {
-			Debug.Log("Platform not supported");
-		}
-		Load ();
-		UpdateCoinsText ();
 		Application.targetFrameRate = 60;
 		mainUI = GameObject.Find ("MainUI").GetComponent<MainUIController> ();
-		levelState = LevelState.Character;
+		levelState = LevelState.Playing;
 		mainUI.UpdateUI ();
 	}
 
-	public void NewGame(int character){
+	public void NewGame(){
+		int character = PlayerPrefs.GetInt ("Character",0);
 		gamePlaysThisSession ++;
 		analytics.LogScreen (Application.loadedLevelName);
 		if (charactersUnlocked [character]) {
@@ -100,7 +76,7 @@ public class GameController : MonoBehaviour {
 		}
 	}
 	public void PlayAgain(){
-		NewGame (characterSelected);
+		NewGame ();
 	}
 
 	//end the game on completion or on player death
@@ -140,31 +116,6 @@ public class GameController : MonoBehaviour {
 			}
 			levelState = LevelState.Complete;
 			mainUI.UpdateUI();
-		}
-	}
-
-	public static void UpdateCoinsText(){
-		coinsText.text = playerCoins.ToString();
-	}
-
-
-	public static void Save(){
-		PlayerPrefs.SetInt ("coins",playerCoins);
-		for (int i = 0; i < charactersUnlocked.Length; i++) {
-			if(charactersUnlocked[i]){
-				PlayerPrefs.SetInt("charactersUnlocked" + i.ToString(),1);
-			}else{
-				PlayerPrefs.SetInt("charactersUnlocked" + i.ToString(),0);
-			}
-		}
-	}
-
-	public static void Load(){
-		playerCoins = PlayerPrefs.GetInt ("coins",0);
-		for (int i = 0; i < charactersUnlocked.Length; i++) {
-			if(PlayerPrefs.GetInt("charactersUnlocked" + i.ToString(),0) == 1){
-				charactersUnlocked[i] = true;
-			}
 		}
 	}
 
