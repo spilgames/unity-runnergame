@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 
 public class PushNotifications : MonoBehaviour {
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 	private AndroidJavaObject activityContext = null;
 	private string projectNr = "428456783882";
 	

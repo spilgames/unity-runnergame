@@ -3,14 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 public class LevelButtonController : MonoBehaviour {
 
+	//which level is this button for
 	public int level;
 
+	//the sprite for when the level is unlocked
 	public Sprite unlockedSprite;
-
+	//the locked level sprite	
 	public Sprite lockedSprite;
-
+	//the sprites for ulockable stars from none to 3
 	public Sprite[] starSprites;
 
+	//the image components of the buttons
 	public Image buttonImage;
 	public Image starsImage;
 
@@ -19,9 +22,13 @@ public class LevelButtonController : MonoBehaviour {
 		WorkOutButtonImage ();
 	}
 
-
+	//what to do if the button is clicked
 	public void ButtonClicked(){
-
+		if (SprongData.levelsUnlocked [level - 1]) {
+			SprongData.level = level;
+			SprongData.SavePlayerData();
+			Application.LoadLevel("CharacterSelect");
+		}
 	}
 
 	void WorkOutButtonImage(){

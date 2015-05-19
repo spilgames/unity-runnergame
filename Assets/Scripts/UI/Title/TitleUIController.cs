@@ -42,7 +42,12 @@ public class TitleUIController : MonoBehaviour {
 
 	}
 
-
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.X)){
+			PlayerPrefs.DeleteAll();
+			Application.LoadLevel(Application.loadedLevel);
+		}
+	}
 
 
 }

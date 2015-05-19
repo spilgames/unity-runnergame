@@ -7,7 +7,6 @@ public class GameOverPanelController : MonoBehaviour {
 
 	//the text that fills the game over panel
 	public Text gameOverInfo;
-	public Text coinsEarnedText;
 
 
 	//the buttons for delayed showing
@@ -28,7 +27,6 @@ public class GameOverPanelController : MonoBehaviour {
 
 	IEnumerator AddUpCoins(int earned){
 		SprongData.playerCoins += earned;
-		coinsEarnedText.text = earned.ToString ();
 		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);
 		homeButton.SetActive (true);

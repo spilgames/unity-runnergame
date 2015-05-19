@@ -11,9 +11,6 @@ public class CharacterSelectController : MonoBehaviour {
 	//the animal buttons 
 	public Image[] buttons;
 
-	//the coins amountText
-	public Text coinsAmountText;
-
 	//the GAV3 prefab
 	public GoogleAnalyticsV3 analytics;
 
@@ -40,8 +37,6 @@ public class CharacterSelectController : MonoBehaviour {
 		#if UNITY_IOS
 		Advertisement.Initialize (unityAdsIos);
 		#endif
-		//update the coins UI
-		coinsAmountText.text = PlayerPrefs.GetInt ("coins",0).ToString();
 		//load the status of unlocks so far
 		SprongData.LoadPlayerData ();
 		//make sure that at least the fist character is unlocked
@@ -57,6 +52,14 @@ public class CharacterSelectController : MonoBehaviour {
 		rewardedButton.SetActive(false);
 		characterLockedPanel.SetActive (false);
 		StopCoroutine ("CheckForRewardedAd");
+	}
+
+	//cheats
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.C)) {
+			SprongData.playerCoins += 400;
+			SprongData.SavePlayerData();
+		}
 	}
 
 	//check for a rewarded video
@@ -116,8 +119,6 @@ public class CharacterSelectController : MonoBehaviour {
 		if (SprongData.playerCoins >= 400) {
 			//deduct the coins
 			SprongData.playerCoins -= 400;
-			//update the UI to reflect it
-			coinsAmountText.text = SprongData.playerCoins.ToString();
 			//unlock the character
 			SprongData.charactersUnlocked[lockedCharacterNumber] = true;
 			//save the change
@@ -144,7 +145,6 @@ public class CharacterSelectController : MonoBehaviour {
 	public void RewardPlayer(){
 		RewardedSuccessPanel.SetActive(true);
 		SprongData.playerCoins += 300;
-		coinsAmountText.text = SprongData.playerCoins.ToString();
 		RewardedPanel.SetActive (false);
 		rewardedButton.SetActive (false);
 		StartCoroutine ("CheckForRewardedAd");

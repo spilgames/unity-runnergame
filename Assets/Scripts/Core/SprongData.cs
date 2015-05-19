@@ -15,8 +15,13 @@ public class SprongData : MonoBehaviour {
 	//the currently selected character
 	public static int characterSelected;
 
+	//what level is the player in
+	public static int level;
+
 	//save all the player data
 	public static void SavePlayerData(){
+		//save the level selected
+		PlayerPrefs.SetInt ("level",level);
 
 		//save the amount of coins that the player has
 		PlayerPrefs.SetInt ("coins",playerCoins);
@@ -36,9 +41,9 @@ public class SprongData : MonoBehaviour {
 		//save which levels have been unlocked
 		for (int i = 0; i < levelsUnlocked.Length; i ++) {
 			if(levelsUnlocked[i]){
-				PlayerPrefs.SetInt("levelsUnlocked" + (i+1).ToString(),1);
+				PlayerPrefs.SetInt("levelsUnlocked" + (i).ToString(),1);
 			}else{
-				PlayerPrefs.SetInt("levelsUnlocked" + (i+1).ToString(),0);
+				PlayerPrefs.SetInt("levelsUnlocked" + (i).ToString(),0);
 			}
 		}
 
@@ -46,6 +51,7 @@ public class SprongData : MonoBehaviour {
 
 	//load all the player data
 	public static void LoadPlayerData(){
+		level = PlayerPrefs.GetInt ("level",1);
 		playerCoins = PlayerPrefs.GetInt ("coins", 0);
 		characterSelected = PlayerPrefs.GetInt ("character", 0);
 		for (int i = 0; i < charactersUnlocked.Length; i++) {

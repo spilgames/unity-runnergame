@@ -8,9 +8,6 @@ public class GameController : MonoBehaviour {
 	//speed that the platforms move
 	public static float gameSpeed = 0;
 
-	//the UI showing coins the player has
-	public static Text coinsText;
-
 	//the UI controller
 	public static MainUIController mainUI;
 
