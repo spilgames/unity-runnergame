@@ -7,7 +7,7 @@ public class TitleUIController : MonoBehaviour {
 	public GameObject optionsPanel;
 
 	public void OpenLevelSelect(){
-		Application.LoadLevel (1);
+		Application.LoadLevel ("LevelSelect");
 	}
 
 	public void ToggleInfoPanel(){
