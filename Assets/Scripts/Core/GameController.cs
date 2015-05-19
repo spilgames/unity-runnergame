@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour {
 
 
 	void Start(){
+		mainUI = GameObject.Find ("MainUI").GetComponent<MainUIController>();
 		//if mute selected then mute the sound right away
 		if (PlayerPrefs.GetInt ("Mute", 0) == 1) {
 			AudioListener.pause = true;
@@ -46,6 +47,9 @@ public class GameController : MonoBehaviour {
 		levelState = LevelState.Playing;
 		//activate the correct UI panel
 		mainUI.UpdateUI ();
+
+		//set the speed of the moving stuff
+		gameSpeed = 9.2f;
 	}
 
 	public void NewGame(){
