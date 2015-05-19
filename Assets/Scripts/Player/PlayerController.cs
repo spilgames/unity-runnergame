@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 		playerCollider.enabled = true;
 		playerBody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
+		anim.SetInteger ("Animal",SprongData.characterSelected);
 	}
 
 

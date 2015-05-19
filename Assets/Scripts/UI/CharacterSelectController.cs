@@ -118,13 +118,13 @@ public class CharacterSelectController : MonoBehaviour {
 			SprongData.playerCoins -= 400;
 			//update the UI to reflect it
 			coinsAmountText.text = SprongData.playerCoins.ToString();
-			UpdateButtonImages();
 			//unlock the character
 			SprongData.charactersUnlocked[lockedCharacterNumber] = true;
 			//save the change
 			SprongData.SavePlayerData();
 			//close the panel
 			CloseLockedCharactersScreen();
+			UpdateButtonImages();
 		}
 	}
 
@@ -132,7 +132,8 @@ public class CharacterSelectController : MonoBehaviour {
 	public void StartGame(int character){
 		if (SprongData.charactersUnlocked [character]) {
 			SprongData.characterSelected = character;
-			Application.LoadLevel (PlayerPrefs.GetInt ("level", 0));
+			SprongData.SavePlayerData();
+			Application.LoadLevel (PlayerPrefs.GetInt ("level", 1));
 		} else {
 			//if not unlocked, show the unlock character screen
 			ShowLockedCharacterScreen(character);

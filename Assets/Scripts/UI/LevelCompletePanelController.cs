@@ -20,10 +20,9 @@ public class LevelCompletePanelController : MonoBehaviour {
 
 	IEnumerator AddUpCoins(int earned){
 		earned += 100;
-		GameController.playerCoins += earned;
-		GameController.UpdateCoinsText ();
+		SprongData.playerCoins += earned;
 		coinsEarnedText.text = earned.ToString ();
-		GameController.Save ();
+		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);
 		mainMenuButton.SetActive (true);
 		levelSelectButton.SetActive(true);

@@ -3,23 +3,18 @@ using System.Collections;
 using UnityEngine.UI;
 public class MainUIController : MonoBehaviour {
 
-
-
 	//the components of the UI
 	public GameObject inGamePanel;
 	public GameObject gameOverPanel;
 	public GameObject levelCompletePanel;
 	public GameObject tutorialPanel;
-
-	public CharacterSelectController characterSelect;
-
+	
 	void Start(){
 		if (PlayerPrefs.GetInt ("Tutorial", 0) == 0) {
 			tutorialPanel.SetActive(true);
 			PlayerPrefs.SetInt("Tutorial",1);
 		}
 	}
-
 
 	public void UpdateUI(){
 		if (GameController.levelState == GameController.LevelState.Playing) {

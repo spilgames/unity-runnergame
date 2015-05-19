@@ -27,10 +27,9 @@ public class GameOverPanelController : MonoBehaviour {
 	}
 
 	IEnumerator AddUpCoins(int earned){
-		GameController.playerCoins += earned;
-		GameController.UpdateCoinsText ();
+		SprongData.playerCoins += earned;
 		coinsEarnedText.text = earned.ToString ();
-		GameController.Save ();
+		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);
 		homeButton.SetActive (true);
 		pickAnimalButton.SetActive(true);
