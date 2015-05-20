@@ -60,6 +60,7 @@ public class GameController : MonoBehaviour {
 		GameObject[] coins = GameObject.FindGameObjectsWithTag ("Coin");
 		for (int i = 0; i < coins.Length; i++) {
 			coins [i].GetComponent<SpriteRenderer> ().enabled = true;
+			Debug.Log(coins[i].gameObject.name);
 		}
 		maximumCoinsThisLevel = coins.Length;
 		//reset the moving stuff
