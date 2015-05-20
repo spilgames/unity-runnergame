@@ -41,9 +41,9 @@ public class SprongData : MonoBehaviour {
 		//save which levels have been unlocked
 		for (int i = 0; i < levelsUnlocked.Length; i ++) {
 			if(levelsUnlocked[i]){
-				PlayerPrefs.SetInt("levelsUnlocked" + (i).ToString(),1);
+				PlayerPrefs.SetInt("levelsUnlocked" + i.ToString(),1);
 			}else{
-				PlayerPrefs.SetInt("levelsUnlocked" + (i).ToString(),0);
+				PlayerPrefs.SetInt("levelsUnlocked" + i.ToString(),0);
 			}
 		}
 

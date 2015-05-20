@@ -10,13 +10,13 @@ public class PlayerController : MonoBehaviour {
 	//is the player grounded
 	public bool grounded;
 	//grab the players rigidbody
-	Rigidbody2D playerBody;
+	public Rigidbody2D playerBody;
 	//is the player dead
 	bool dead = false;
 	//grab the animator
 	public Animator anim;
 	//the players collider
-	CircleCollider2D playerCollider;
+	public CircleCollider2D playerCollider;
 
 	//complex jump shit
 	public float downforce;
@@ -32,11 +32,9 @@ public class PlayerController : MonoBehaviour {
 
 	//initialise the player
 	void Start(){
-		playerCollider = GetComponent<CircleCollider2D> ();
 		playerCollider.enabled = true;
-		playerBody = GetComponent<Rigidbody2D> ();
-		anim = GetComponent<Animator> ();
 		anim.SetInteger ("Animal",SprongData.characterSelected);
+
 	}
 
 
@@ -99,6 +97,7 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = gameController.playerStartPosition.rotation;
 		playerBody.fixedAngle = true;
 		playerBody.drag = 0;
+		playerBody.gravityScale = 1;
 		playerCollider.enabled = true;
 		playerBody.velocity = Vector2.zero;
 		dead = false;
@@ -117,7 +116,12 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (coll.gameObject.name == "EndTrigger") {
 			gameController.EndGame(false);
-			coll.gameObject.GetComponent<EndTriggerFX>().EndFX();
+			dead = true;
+			playerBody.gravityScale = 0;
+			playerBody.fixedAngle = false;
+			playerBody.AddTorque (-800);
+			playerBody.AddForce (new Vector2 (15, 50), ForceMode2D.Impulse);
+//			coll.gameObject.GetComponent<EndTriggerFX>().EndFX();
 		}
 	}
 

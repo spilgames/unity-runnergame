@@ -19,8 +19,11 @@ public class LevelSelectController : MonoBehaviour {
 	public GameObject world3LevelListPanel;
 	public GameObject levelInfoPanel;
 
-	void Start(){
+	void Awake(){
 		SprongData.LoadPlayerData ();
+	}
+
+	void Start(){
 		levelSelectState = LevelSelectStates.WorldSelect;
 		UpdateUI ();
 	}

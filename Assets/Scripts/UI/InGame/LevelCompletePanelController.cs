@@ -8,10 +8,11 @@ public class LevelCompletePanelController : MonoBehaviour {
 	public Text coinsEarnedText;
 	public GameObject mainMenuButton;
 	public GameObject levelSelectButton;
+	public GameObject retryButton;
+	public Image[] starImages;
 
 	void OnEnable(){
-		int coinsEarned = Mathf.FloorToInt (gameController.playerDistancePercent / 3);
-		StartCoroutine (AddUpCoins(coinsEarned));
+		StartCoroutine (AddUpCoins(gameController.coinsCollectedThisRun));
 	}
 	void OnDisable(){
 		mainMenuButton.SetActive (false);
@@ -19,13 +20,31 @@ public class LevelCompletePanelController : MonoBehaviour {
 	}
 
 	IEnumerator AddUpCoins(int earned){
-		earned += 100;
 		SprongData.playerCoins += earned;
-		coinsEarnedText.text = earned.ToString ();
+		coinsEarnedText.text = earned.ToString () +"/"+ gameController.maximumCoinsThisLevel.ToString();
 		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);
 		mainMenuButton.SetActive (true);
 		levelSelectButton.SetActive(true);
+		retryButton.SetActive (true);
+		for (int i = 0; i < starImages.Length; i++) {
+			starImages[i].color = Color.black;
+		}
+
+		float coinsCollectedPercent = ((float)earned / (float)gameController.maximumCoinsThisLevel) * 100;
+
+		if (coinsCollectedPercent > 33) {
+			starImages[0].color = Color.yellow;
+			PlayerPrefs.SetInt ("stars" + SprongData.level, 1);
+		}
+		if (coinsCollectedPercent > 66) {
+			starImages[1].color = Color.yellow;
+			PlayerPrefs.SetInt ("stars" + SprongData.level, 2);
+		}
+		if (coinsCollectedPercent >= 100) {
+			starImages[2].color = Color.yellow;
+			PlayerPrefs.SetInt ("stars" + SprongData.level, 3);
+		}
 	}
 
 
@@ -34,7 +53,7 @@ public class LevelCompletePanelController : MonoBehaviour {
 	}
 	
 	public void LoadLevelSelect(){
-		Application.LoadLevel (1);
+		Application.LoadLevel ("LevelSelect");
 	}
 
 }

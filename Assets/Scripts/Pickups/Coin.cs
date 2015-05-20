@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Coin : MonoBehaviour {
 
+	public SpriteRenderer spriteRenderer;
+
 	void OnTriggerEnter2D(Collider2D coll){
 		if(coll.gameObject.tag == "Player"){
 			KillCoin();
@@ -10,9 +12,8 @@ public class Coin : MonoBehaviour {
 	}
 
 	void KillCoin(){
-		SprongData.playerCoins ++;
-		SprongData.SavePlayerData ();
-		gameObject.SetActive (false);
+		GameDirectory.gameController.coinsCollectedThisRun ++;
+		spriteRenderer.enabled = false;
 		PoolingController.PlayCoinFX (transform.position);
 	}
 }
