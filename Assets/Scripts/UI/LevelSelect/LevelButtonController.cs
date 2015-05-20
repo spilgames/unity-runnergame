@@ -27,7 +27,7 @@ public class LevelButtonController : MonoBehaviour {
 		if (SprongData.levelsUnlocked [level - 1]) {
 			SprongData.level = level;
 			SprongData.SavePlayerData();
-			Application.LoadLevel("CharacterSelect");
+			GetComponentInParent<LevelSelectController>().ToggleLevelInfo();
 		}
 	}
 

@@ -17,7 +17,7 @@ public class LevelSelectController : MonoBehaviour {
 	public GameObject world1LevelListPanel;
 	public GameObject world2LevelListPanel;
 	public GameObject world3LevelListPanel;
-
+	public GameObject levelInfoPanel;
 
 	void Start(){
 		SprongData.LoadPlayerData ();
@@ -82,6 +82,15 @@ public class LevelSelectController : MonoBehaviour {
 			break;
 		default:
 			break;
+		}
+	}
+
+	//open the level info panel
+	public void ToggleLevelInfo(){
+		if (levelInfoPanel.activeInHierarchy) {
+			levelInfoPanel.SetActive (false);
+		} else {
+			levelInfoPanel.SetActive(true);
 		}
 	}
 
