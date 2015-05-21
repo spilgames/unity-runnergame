@@ -18,6 +18,9 @@ public class LevelCompletePanelController : MonoBehaviour {
 		mainMenuButton.SetActive (false);
 		retryButton.SetActive(false);
 		levelSelectButton.SetActive(false);
+		for(int i = 0; i < starImages.Length; i ++){
+			starImages[i].gameObject.SetActive(false);
+		}
 	}
 
 	IEnumerator AddUpCoins(int earned){
@@ -31,6 +34,7 @@ public class LevelCompletePanelController : MonoBehaviour {
 		retryButton.SetActive (true);
 		for (int i = 0; i < starImages.Length; i++) {
 			starImages[i].color = Color.black;
+			starImages[i].gameObject.SetActive(true);
 		}
 
 		float coinsCollectedPercent = ((float)earned / (float)gameController.maximumCoinsThisLevel) * 100;
