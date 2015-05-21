@@ -543,7 +543,7 @@ namespace SimpleSpritePackerEditor
 			if (SPTools.CreateBlankTexture(texturePath, true))
 			{
 				// Set the texture reff in the sprite packer instance
-				asset.texture = Resources.LoadAssetAtPath(texturePath, typeof(Texture2D)) as Texture2D;
+				asset.texture = AssetDatabase.LoadAssetAtPath(texturePath, typeof(Texture2D)) as Texture2D;
 			}
 			
 			// Focus on the new sprite packer
