@@ -11,6 +11,7 @@ public class MainUIController : MonoBehaviour {
 	
 	void Start(){
 		if (PlayerPrefs.GetInt ("Tutorial", 0) == 0) {
+			GameController.gameSpeed = 0;
 			tutorialPanel.SetActive(true);
 			PlayerPrefs.SetInt("Tutorial",1);
 		}
@@ -35,6 +36,7 @@ public class MainUIController : MonoBehaviour {
 	}
 
 	public void CloseTutorialPanel(){
+		GameController.gameSpeed = GameController.playingSpeed;
 		tutorialPanel.SetActive (false);
 	}
 

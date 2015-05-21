@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 	
 	public GoogleAnalyticsV3 analytics;
 
 	//speed that the platforms move
+
+	public static float playingSpeed = 9.2f;
 	public static float gameSpeed = 0;
 
 	//the UI controller
@@ -28,6 +31,7 @@ public class GameController : MonoBehaviour {
 	public int coinsCollectedThisRun;
 	public int maximumCoinsThisLevel;
 
+	List<GameObject> coinsInThisLevel = new List<GameObject>();
 
 	//the different states of a level
 	public enum LevelState{
@@ -39,6 +43,11 @@ public class GameController : MonoBehaviour {
 
 
 	void Start(){
+		GameObject[] coins = GameObject.FindGameObjectsWithTag ("Coin");
+		for (int i = 0; i < coins.Length; i++) {
+			coinsInThisLevel.Add(coins[i]);
+		}
+		maximumCoinsThisLevel = coins.Length;
 		mainUI = GameObject.Find ("MainUI").GetComponent<MainUIController>();
 		//if mute selected then mute the sound right away
 		if (PlayerPrefs.GetInt ("Mute", 0) == 1) {
@@ -56,13 +65,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void NewGame(){
-		coinsCollectedThisRun = 0;
-		GameObject[] coins = GameObject.FindGameObjectsWithTag ("Coin");
-		for (int i = 0; i < coins.Length; i++) {
-			coins [i].GetComponent<SpriteRenderer> ().enabled = true;
-			Debug.Log(coins[i].gameObject.name);
+		//activate all coins
+		for(int i = 0; i < coinsInThisLevel.Count; i ++){
+			coinsInThisLevel[i].SetActive(true);
 		}
-		maximumCoinsThisLevel = coins.Length;
+		coinsCollectedThisRun = 0;
 		//reset the moving stuff
 		movingStuff.transform.position = movingStuffStartPosition.position;
 		//reset the player 
@@ -80,8 +87,6 @@ public class GameController : MonoBehaviour {
 
 	//end the game on completion or on player death
 	public void EndGame(bool died){
-		//stop the moving stuff
-
 		//if the player died
 		if (died) {
 			gameSpeed = 0;

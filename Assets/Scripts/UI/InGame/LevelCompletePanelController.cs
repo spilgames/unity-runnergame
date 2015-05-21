@@ -16,12 +16,14 @@ public class LevelCompletePanelController : MonoBehaviour {
 	}
 	void OnDisable(){
 		mainMenuButton.SetActive (false);
-		mainMenuButton.SetActive(false);
+		retryButton.SetActive(false);
+		levelSelectButton.SetActive(false);
 	}
 
 	IEnumerator AddUpCoins(int earned){
 		SprongData.playerCoins += earned;
 		coinsEarnedText.text = earned.ToString () +"/"+ gameController.maximumCoinsThisLevel.ToString();
+		SprongData.levelsUnlocked [SprongData.level] = true;
 		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);
 		mainMenuButton.SetActive (true);
@@ -37,6 +39,7 @@ public class LevelCompletePanelController : MonoBehaviour {
 			starImages[0].color = Color.yellow;
 			PlayerPrefs.SetInt ("stars" + SprongData.level, 1);
 		}
+		
 		if (coinsCollectedPercent > 66) {
 			starImages[1].color = Color.yellow;
 			PlayerPrefs.SetInt ("stars" + SprongData.level, 2);

@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour {
 
 	void KillCoin(){
 		GameDirectory.gameController.coinsCollectedThisRun ++;
-		spriteRenderer.enabled = false;
 		PoolingController.PlayCoinFX (transform.position);
+		gameObject.SetActive (false);
 	}
 }
