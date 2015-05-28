@@ -15,6 +15,7 @@ public class PoolingController : MonoBehaviour {
 	}
 
 	void SpawnPool(){
+		coinFXPool.Clear ();
 		for(int i = 0; i < coinFXToPool; i++){
 			GameObject newCoinFX = (GameObject)Instantiate(coinFXobject);
 			newCoinFX.SetActive(false);
