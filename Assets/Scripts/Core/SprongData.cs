@@ -46,12 +46,13 @@ public class SprongData : MonoBehaviour {
 				PlayerPrefs.SetInt("levelsUnlocked" + i.ToString(),0);
 			}
 		}
+		Debug.Log ("Saved DATA at level: " + Application.loadedLevelName );
 
 	}
 
 	//load all the player data
 	public static void LoadPlayerData(){
-		level = PlayerPrefs.GetInt ("level",1);
+		level = PlayerPrefs.GetInt ("level",0);
 		playerCoins = PlayerPrefs.GetInt ("coins", 0);
 		characterSelected = PlayerPrefs.GetInt ("character", 0);
 		for (int i = 0; i < charactersUnlocked.Length; i++) {
@@ -64,6 +65,9 @@ public class SprongData : MonoBehaviour {
 				levelsUnlocked[i] = true;
 			}
 		}
+
+		Debug.Log ("LOADED DATA at level: " + Application.loadedLevelName);
+
 
 	}
 }

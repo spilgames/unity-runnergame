@@ -6,6 +6,7 @@ public class TitleUIController : MonoBehaviour {
 	public GameObject infoPanel;
 	public GameObject optionsPanel;
 
+
 	public void OpenLevelSelect(){
 		Application.LoadLevel ("LevelSelect");
 	}
@@ -45,7 +46,6 @@ public class TitleUIController : MonoBehaviour {
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.X)){
 			PlayerPrefs.DeleteAll();
-			Application.LoadLevel(Application.loadedLevel);
 		}
 	}
 

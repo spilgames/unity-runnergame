@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour {
 
 
 	void Start(){
+		analytics = GameObject.Find ("GAv3").GetComponent<GoogleAnalyticsV3>();
+		SprongData.LoadPlayerData ();
 		GameObject[] coins = GameObject.FindGameObjectsWithTag ("Coin");
 		for (int i = 0; i < coins.Length; i++) {
 			coinsInThisLevel.Add(coins[i]);
@@ -62,6 +64,7 @@ public class GameController : MonoBehaviour {
 		//activate the correct UI panel
 		mainUI.UpdateUI ();
 		NewGame ();
+		analytics.LogScreen (Application.loadedLevelName);
 	}
 
 	public void NewGame(){

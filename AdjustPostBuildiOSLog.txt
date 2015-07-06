@@ -1,3 +1,3 @@
 Xcode sdk path: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk
-Unity3d Xcode project path: /Users/richardelms/Dropbox/SPRONG.apk/Unity-iPhone.xcodeproj/project.pbxproj
+Unity3d Xcode project path: /Users/richardelms/Dropbox/SprongV2.apk/Unity-iPhone.xcodeproj/project.pbxproj
 framework path: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/

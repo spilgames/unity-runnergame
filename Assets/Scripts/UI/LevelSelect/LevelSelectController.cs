@@ -3,6 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 public class LevelSelectController : MonoBehaviour {
 
+	//the locked and unlocked button sprites
+	public Sprite unlockedSprite;
+	public Image world2ButtonImage;
+	public Image world3ButtonImage;
+
+
 	public enum LevelSelectStates
 	{
 		WorldSelect,
@@ -19,13 +25,30 @@ public class LevelSelectController : MonoBehaviour {
 	public GameObject world3LevelListPanel;
 	public GameObject levelInfoPanel;
 
-	void Awake(){
+	void OnEnable(){
 		SprongData.LoadPlayerData ();
+		if(SprongData.levelsUnlocked[8]){
+			world2ButtonImage.sprite = unlockedSprite;
+		}
+		if(SprongData.levelsUnlocked[16]){
+			world3ButtonImage.sprite = unlockedSprite;
+		}
 	}
 
 	void Start(){
-		levelSelectState = LevelSelectStates.WorldSelect;
-		UpdateUI ();
+		if (SprongData.level == 0) {
+			levelSelectState = LevelSelectStates.WorldSelect;
+		}
+		if(SprongData.level > 0) {
+			levelSelectState = LevelSelectStates.World1;
+		}
+		if(SprongData.level >= 8) {
+			levelSelectState = LevelSelectStates.World2;
+		}
+		if(SprongData.level >= 16) {
+			levelSelectState = LevelSelectStates.World3;
+		}
+			UpdateUI ();
 	}
 
 
@@ -69,7 +92,7 @@ public class LevelSelectController : MonoBehaviour {
 			if(world2LevelListPanel.activeInHierarchy){
 				levelSelectState = LevelSelectStates.WorldSelect;
 				UpdateUI();
-			}else{
+			}else if(SprongData.levelsUnlocked[8]){
 				levelSelectState = LevelSelectStates.World2;
 				UpdateUI();
 			}
@@ -78,7 +101,7 @@ public class LevelSelectController : MonoBehaviour {
 			if(world3LevelListPanel.activeInHierarchy){
 				levelSelectState = LevelSelectStates.WorldSelect;
 				UpdateUI();
-			}else{
+			}else if(SprongData.levelsUnlocked[16]){
 				levelSelectState = LevelSelectStates.World3;
 				UpdateUI();
 			}
@@ -86,6 +109,11 @@ public class LevelSelectController : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+	public void LoadWorldSelect(){
+		levelSelectState = LevelSelectStates.WorldSelect;
+		UpdateUI ();
 	}
 
 	//open the level info panel
