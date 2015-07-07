@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Advertisements;
+using UnityEngine.UI;
 public class TitleUIController : MonoBehaviour {
 
 	//unity ads ids
@@ -10,17 +11,38 @@ public class TitleUIController : MonoBehaviour {
 	//the panel animators
 	public Animator characterSelectAnimator;
 	public Animator settingsPanelAnimator;
+	bool settingsOpen;
 
 	//the character select controller
 	public CharacterSelectController characterSelect;
 
+	//the mute buttons
+	public Image muteMusicButton;
+	public Image muteSfxButton;
+	public Sprite[] musicSprites;
+	public Sprite[] sfxSprites;
+	public AudioSource musicSource;
+
+	void Awake(){
+		SprongData.LoadPlayerData ();
+		if (SprongData.muteMusic == 1) {
+			musicSource.mute = true;
+			muteMusicButton.sprite = musicSprites [1];
+		} else {
+			musicSource.Play();
+		}
+		if(SprongData.muteSFX == 1){
+			muteSfxButton.sprite = sfxSprites[1];
+		}
+	}
 
 	void Start(){
 		InitUnityAds ();
 		//load the status of unlocks so far
-		SprongData.LoadPlayerData ();
+
 		//make sure that at least the fist character is unlocked
 		SprongData.charactersUnlocked [0] = true;
+
 	}
 
 	void Update(){
@@ -54,8 +76,15 @@ public class TitleUIController : MonoBehaviour {
 
 	//load the settings panel
 	public void LoadSettingsPanel(){
-		settingsPanelAnimator.SetTrigger ("In");
+		if (settingsOpen) {
+			settingsPanelAnimator.SetTrigger ("Out");
+			settingsOpen = false;
+		}else{
+			settingsPanelAnimator.SetTrigger ("In");
+			settingsOpen = true;
+		}
 	}
+
 
 	//start the game
 	public void StartGame(){
@@ -69,13 +98,29 @@ public class TitleUIController : MonoBehaviour {
 	}
 
 	// mute the sound
-	public void Mute(){
-		if (PlayerPrefs.GetInt ("Mute", 0) == 0) {
-			AudioListener.pause = true;
-			PlayerPrefs.SetInt ("Mute", 1);
+	public void MuteMusic(){
+		if (SprongData.muteMusic == 0) {
+			musicSource.mute = true;
+			muteMusicButton.sprite = musicSprites[1];
+			SprongData.muteMusic = 1;
+			SprongData.SavePlayerData();
 		} else {
-			AudioListener.pause = false;
-			PlayerPrefs.SetInt ("Mute", 0);
+			musicSource.mute = false;
+			musicSource.Play();
+			muteMusicButton.sprite = musicSprites[0];
+			SprongData.muteMusic = 0;
+			SprongData.SavePlayerData();
+		}
+	}
+	public void MuteSFX(){
+		if (SprongData.muteSFX == 0) {
+			muteSfxButton.sprite = sfxSprites[1];
+			SprongData.muteSFX = 1;
+			SprongData.SavePlayerData();
+		} else {
+			muteSfxButton.sprite = sfxSprites[0];
+			SprongData.muteSFX = 0;
+			SprongData.SavePlayerData();
 		}
 	}
 }

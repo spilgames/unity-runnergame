@@ -18,8 +18,16 @@ public class SprongData : MonoBehaviour {
 	//what level is the player in
 	public static int level;
 
+	//sound options
+	public static int muteMusic;
+	public static int muteSFX;
+
 	//save all the player data
 	public static void SavePlayerData(){
+		//save the sound options
+		PlayerPrefs.SetInt ("muteMusic", muteMusic);
+		PlayerPrefs.SetInt ("muteSFX", muteSFX);
+
 		//save the level selected
 		PlayerPrefs.SetInt ("level",level);
 
@@ -52,6 +60,11 @@ public class SprongData : MonoBehaviour {
 
 	//load all the player data
 	public static void LoadPlayerData(){
+
+		//save the sound options
+		muteMusic = PlayerPrefs.GetInt ("muteMusic",0);
+		muteSFX = PlayerPrefs.GetInt ("muteSFX",0);
+
 		level = PlayerPrefs.GetInt ("level",0);
 		playerCoins = PlayerPrefs.GetInt ("coins", 0);
 		characterSelected = PlayerPrefs.GetInt ("character", 0);

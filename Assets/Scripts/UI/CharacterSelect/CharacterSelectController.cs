@@ -10,6 +10,9 @@ public class CharacterSelectController : MonoBehaviour {
 	//the unlock character buttons
 	public GameObject[] unlockButtons;
 
+	//the character spotlights
+	public Image[] spotlights;
+
 	//black out color for locked animals
 	public Color blackOut;
 	public Color fullColor;
@@ -25,9 +28,18 @@ public class CharacterSelectController : MonoBehaviour {
 
 	//celebration particles
 	public ParticleSystem celebrationFX;
-	
+
+	//notification stuff
+	public Text characternotificationNumber;
+	public GameObject characternotificationObject;
+
+	void Start(){
+		CheckForCharacterNotification ();
+	}
+
 	// Use this for initialization
 	public void InitCharacterSelect () {
+		SetSpotlight ();
 		coinsText.text = SprongData.playerCoins.ToString ();
 		//update the character images accordingly
 		UpdateButtonImages ();
@@ -37,8 +49,20 @@ public class CharacterSelectController : MonoBehaviour {
 
 	//reset stuff 
 	public void CloseCharacterSelect(){
+		CheckForCharacterNotification ();
 		rewardedButton.SetActive(false);
 		StopCoroutine ("CheckForRewardedAd");
+	}
+
+	//set the correct spotlight
+	public void SetSpotlight(){
+		for (int i = 0; i < spotlights.Length; i++) {
+			if(i == SprongData.characterSelected){
+				spotlights[i].color = Color.white;
+			}else{
+				spotlights[i].color = new Color(1,1,1,0);
+			}
+		}
 	}
 
 	//cheats
@@ -52,6 +76,21 @@ public class CharacterSelectController : MonoBehaviour {
 
 	}
 
+	//handle the notification thing
+	void CheckForCharacterNotification(){
+		int amount = 0;
+		for (int i = 0; i < SprongData.charactersUnlocked.Length; i ++) {
+			if (!SprongData.charactersUnlocked [i] && SprongData.playerCoins >= i * 100) {
+				characternotificationObject.SetActive (true);
+				amount ++;
+			}
+		}
+		if (amount == 0) {
+			characternotificationObject.SetActive (false);
+		} else {
+			characternotificationNumber.text = amount.ToString ();
+		}
+	}
 	//check for a rewarded video
 	IEnumerator CheckForRewardedAd(){
 		yield return new WaitForSeconds (1);
@@ -102,6 +141,7 @@ public class CharacterSelectController : MonoBehaviour {
 			//close the panel
 			UpdateButtonImages();
 			celebrationFX.Play();
+			SetSpotlight ();
 		}
 	}
 	
@@ -110,6 +150,7 @@ public class CharacterSelectController : MonoBehaviour {
 		if (SprongData.charactersUnlocked [character]) {
 			SprongData.characterSelected = character;
 			SprongData.SavePlayerData ();
+			SetSpotlight ();
 		}
 	}
 
