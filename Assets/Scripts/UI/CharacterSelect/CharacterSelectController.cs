@@ -3,16 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 public class CharacterSelectController : MonoBehaviour {
-
-	//unity ads ids
-	public string unityAdsIos;
-	public string unityAdsAndroid;
-
+	
 	//the animal buttons 
 	public Image[] buttons;
 
-	//the GAV3 prefab
-	public GoogleAnalyticsV3 analytics;
+	//the unlock character buttons
+	public GameObject[] unlockButtons;
 
 	//black out color for locked animals
 	public Color blackOut;
@@ -21,26 +17,18 @@ public class CharacterSelectController : MonoBehaviour {
 	//the rewarded video button
 	public GameObject rewardedButton;
 
-	//the characterlockedpanel
-	public GameObject characterLockedPanel;
-	public GameObject RewardedPanel;
+	//the reward success panel
 	public GameObject RewardedSuccessPanel;
 
-	//what character did they try to use?
-	int lockedCharacterNumber;
+	//the coins text
+	public Text coinsText;
+
+	//celebration particles
+	public ParticleSystem celebrationFX;
 	
 	// Use this for initialization
-	void OnEnable () {
-		#if UNITY_ANDROID
-		Advertisement.Initialize (unityAdsAndroid);
-		#endif
-		#if UNITY_IOS
-		Advertisement.Initialize (unityAdsIos);
-		#endif
-		//load the status of unlocks so far
-		SprongData.LoadPlayerData ();
-		//make sure that at least the fist character is unlocked
-		SprongData.charactersUnlocked [0] = true;
+	public void InitCharacterSelect () {
+		coinsText.text = SprongData.playerCoins.ToString ();
 		//update the character images accordingly
 		UpdateButtonImages ();
 		//check to see if there are any ads avalible
@@ -48,25 +36,29 @@ public class CharacterSelectController : MonoBehaviour {
 	}
 
 	//reset stuff 
-	void OnDisable(){
+	public void CloseCharacterSelect(){
 		rewardedButton.SetActive(false);
-		characterLockedPanel.SetActive (false);
 		StopCoroutine ("CheckForRewardedAd");
 	}
 
 	//cheats
 	void Update(){
+		coinsText.text = SprongData.playerCoins.ToString ();
 		if (Input.GetKeyDown (KeyCode.C)) {
-			SprongData.playerCoins += 400;
+			SprongData.playerCoins += 500;
 			SprongData.SavePlayerData();
+
 		}
+
 	}
 
 	//check for a rewarded video
 	IEnumerator CheckForRewardedAd(){
-		yield return new WaitForSeconds (4);
+		yield return new WaitForSeconds (1);
 		if (Advertisement.isReady ("rewardedVideoZone")) {
-			rewardedButton.SetActive(true);
+			rewardedButton.SetActive (true);
+		} else {
+			StartCoroutine("CheckForRewardedAd");
 		}
 	}
 
@@ -75,32 +67,14 @@ public class CharacterSelectController : MonoBehaviour {
 		for (int i = 0; i < SprongData.charactersUnlocked.Length; i ++) {
 			if(SprongData.charactersUnlocked[i]){
 				buttons[i].color = fullColor;
+				unlockButtons[i].SetActive(false);
 			}else{
 				buttons[i].color = blackOut;
+				unlockButtons[i].SetActive(true);
 			}
 		}
 	}
-
-	//if a character is locked, show the locked character screen
-	public void ShowLockedCharacterScreen(int character){
-		lockedCharacterNumber = character;
-		characterLockedPanel.SetActive (true);
-	}
-
-	//close it after
-	public void CloseLockedCharactersScreen(){
-		characterLockedPanel.SetActive (false);
-	}
-
-	//offer a reward for watching an AD
-	public void TriggerRewardedOfferPanel(){
-		if (RewardedPanel.activeInHierarchy) {
-			RewardedPanel.SetActive (false);
-		} else {
-			RewardedPanel.SetActive(true);
-		}
-	}
-
+	
 	//play the AD
 	public void WatchVideo(){
 		Advertisement.Show("rewardedVideoZone", new ShowOptions {
@@ -114,39 +88,35 @@ public class CharacterSelectController : MonoBehaviour {
 	}
 
 	//unlock a character
-	public void UnlockCharacter(){
+	public void UnlockCharacter(int characterNumber){
+		int cost = characterNumber * 100;
 		//if the player has enough coins
-		if (SprongData.playerCoins >= 400) {
+		if (SprongData.playerCoins >= cost) {
 			//deduct the coins
-			SprongData.playerCoins -= 400;
+			SprongData.playerCoins -= cost;
 			//unlock the character
-			SprongData.charactersUnlocked[lockedCharacterNumber] = true;
+			SprongData.charactersUnlocked[characterNumber] = true;
 			//save the change
+			SprongData.characterSelected = characterNumber;
 			SprongData.SavePlayerData();
 			//close the panel
-			CloseLockedCharactersScreen();
 			UpdateButtonImages();
+			celebrationFX.Play();
 		}
 	}
-
-	//select the character, and if unlocked start the game with that character
-	public void StartGame(int character){
+	
+	//select a character
+	public void SelectCharacter(int character){
 		if (SprongData.charactersUnlocked [character]) {
 			SprongData.characterSelected = character;
-			SprongData.SavePlayerData();
-			Application.LoadLevel (PlayerPrefs.GetInt ("level", 1));
-		} else {
-			//if not unlocked, show the unlock character screen
-			ShowLockedCharacterScreen(character);
+			SprongData.SavePlayerData ();
 		}
 	}
 
 	//reward the player after watching an AD
 	public void RewardPlayer(){
 		RewardedSuccessPanel.SetActive(true);
-		SprongData.playerCoins += 300;
-		RewardedPanel.SetActive (false);
-		rewardedButton.SetActive (false);
+		SprongData.playerCoins += 500;
 		StartCoroutine ("CheckForRewardedAd");
 		SprongData.SavePlayerData ();
 	}

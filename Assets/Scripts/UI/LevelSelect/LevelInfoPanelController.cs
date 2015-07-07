@@ -23,7 +23,7 @@ public class LevelInfoPanelController : MonoBehaviour {
 
 	// load the character select
 	public void LoadCharacterSelect(){
-		Application.LoadLevel ("CharacterSelect");
+		Application.LoadLevel (PlayerPrefs.GetInt ("level", 1));
 	}
 
 }
