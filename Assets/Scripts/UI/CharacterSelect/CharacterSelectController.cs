@@ -9,9 +9,13 @@ public class CharacterSelectController : MonoBehaviour {
 
 	//the unlock character buttons
 	public GameObject[] unlockButtons;
+	int characterToUnlock;
 
 	//the character spotlights
 	public Image[] spotlights;
+
+	//the confirm panels
+	public GameObject[] confirmPanels;
 
 	//black out color for locked animals
 	public Color blackOut;
@@ -131,19 +135,44 @@ public class CharacterSelectController : MonoBehaviour {
 		int cost = characterNumber * 100;
 		//if the player has enough coins
 		if (SprongData.playerCoins >= cost) {
-			//deduct the coins
-			SprongData.playerCoins -= cost;
-			//unlock the character
-			SprongData.charactersUnlocked[characterNumber] = true;
-			//save the change
-			SprongData.characterSelected = characterNumber;
-			SprongData.SavePlayerData();
-			//close the panel
-			UpdateButtonImages();
-			celebrationFX.Play();
-			SetSpotlight ();
+			characterToUnlock = characterNumber;
+			ShowConfirm();
 		}
 	}
+
+	//show the confirm purchase prompt
+	void ShowConfirm(){
+		for (int i = 0; i < confirmPanels.Length; i++) {
+			confirmPanels[i].SetActive(false);
+		}
+		confirmPanels [characterToUnlock].SetActive (true);
+	}
+
+	//close the prompts
+	public void CloseConfirm(){
+		for (int i = 0; i < confirmPanels.Length; i ++) {
+			confirmPanels[i].SetActive(false);
+		}
+	}
+
+	//confirm and unlock the character
+	public void ConfirmUnlock(){
+		int cost = characterToUnlock * 100;
+		//deduct the coins
+		SprongData.playerCoins -= cost;
+		//unlock the character
+		SprongData.charactersUnlocked[characterToUnlock] = true;
+		//save the change
+		SprongData.characterSelected = characterToUnlock;
+		SprongData.SavePlayerData();
+		//close the panel
+		UpdateButtonImages();
+		celebrationFX.Play();
+		CloseConfirm ();
+		SetSpotlight ();
+	}
+	
+	
 	
 	//select a character
 	public void SelectCharacter(int character){

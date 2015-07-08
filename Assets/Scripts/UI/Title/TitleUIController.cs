@@ -11,6 +11,7 @@ public class TitleUIController : MonoBehaviour {
 	//the panel animators
 	public Animator characterSelectAnimator;
 	public Animator settingsPanelAnimator;
+	public Animator mainPanelAnim;
 	bool settingsOpen;
 
 	//the character select controller
@@ -22,6 +23,9 @@ public class TitleUIController : MonoBehaviour {
 	public Sprite[] musicSprites;
 	public Sprite[] sfxSprites;
 	public AudioSource musicSource;
+
+	//the levelslectUIcontroller
+	public LevelSelectController levelSelectController;
 
 	void Awake(){
 		SprongData.LoadPlayerData ();
@@ -64,14 +68,26 @@ public class TitleUIController : MonoBehaviour {
 
 	//load the character select panel
 	public void LoadCharacterSelectPanel(){
-		characterSelectAnimator.SetTrigger ("In");
+		mainPanelAnim.SetTrigger ("Out");
 		characterSelect.InitCharacterSelect ();
+		StopCoroutine ("CharacterIn");
+		StartCoroutine ("CharacterIn");
+	}
+	IEnumerator CharacterIn(){
+		yield return new WaitForSeconds (0.3f);
+		characterSelectAnimator.SetTrigger ("In");
 	}
 
 	//close it
 	public void CloseCharacterSelectPanel(){
 		characterSelectAnimator.SetTrigger ("Out");
 		characterSelect.CloseCharacterSelect ();
+		StopCoroutine ("CharacterOut");
+		StartCoroutine ("CharacterOut");
+	}
+	IEnumerator CharacterOut(){
+		yield return new WaitForSeconds (0.4f);
+		mainPanelAnim.SetTrigger ("In");
 	}
 
 	//load the settings panel
@@ -87,8 +103,15 @@ public class TitleUIController : MonoBehaviour {
 
 
 	//start the game
-	public void StartGame(){
-		Application.LoadLevel ("LevelSelect");
+	public void LoadLevelSelect(){
+		StopCoroutine ("FadeOutMainLoad");
+		StartCoroutine ("FadeOutMainLoad");
+	}
+
+	IEnumerator FadeOutMainLoad(){
+		mainPanelAnim.SetTrigger ("Out");
+		yield return new WaitForSeconds (0.4f);
+		levelSelectController.SlideInPanels ();
 	}
 
 

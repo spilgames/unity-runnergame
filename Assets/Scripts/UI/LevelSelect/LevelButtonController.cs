@@ -15,7 +15,6 @@ public class LevelButtonController : MonoBehaviour {
 
 	//the image components of the buttons
 	public Image buttonImage;
-	public Image starsImage;
 
 	// Use this for initialization
 	void Start () {
@@ -35,22 +34,18 @@ public class LevelButtonController : MonoBehaviour {
 		if (SprongData.levelsUnlocked [level - 1]) {
 			buttonImage.sprite = unlockedSprite;
 			switch (PlayerPrefs.GetInt ("stars" + level, 0)) {
-			case 0:
-				starsImage.sprite = starSprites [0];
-				break;
 			case 1:
-				starsImage.sprite = starSprites [1];
+				buttonImage.sprite = starSprites [1];
 				break;
 			case 2:
-				starsImage.sprite = starSprites [2];
+				buttonImage.sprite = starSprites [2];
 				break;
 			case 3:
-				starsImage.sprite = starSprites [3];
+				buttonImage.sprite = starSprites [3];
 				break;
 			}
 		} else {
 			buttonImage.sprite = lockedSprite;
-			starsImage.enabled = false;
 		}
 	}
 }
