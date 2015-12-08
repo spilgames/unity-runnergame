@@ -43,6 +43,7 @@ public class CharacterSelectController : MonoBehaviour {
 
 	// Use this for initialization
 	public void InitCharacterSelect () {
+		CheckForCharacterNotification ();
 		SetSpotlight ();
 		coinsText.text = SprongData.playerCoins.ToString ();
 		//update the character images accordingly
