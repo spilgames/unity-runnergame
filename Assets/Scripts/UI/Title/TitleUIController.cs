@@ -120,8 +120,22 @@ public class TitleUIController : MonoBehaviour {
 		Application.Quit ();
 	}
 
-	// mute the sound
-	public void MuteMusic(){
+//	// mute the sound
+//	public void MuteMusic(){
+//		if (SprongData.muteMusic == 0) {
+//			musicSource.mute = true;
+//			muteMusicButton.sprite = musicSprites[1];
+//			SprongData.muteMusic = 1;
+//			SprongData.SavePlayerData();
+//		} else {
+//			musicSource.mute = false;
+//			musicSource.Play();
+//			muteMusicButton.sprite = musicSprites[0];
+//			SprongData.muteMusic = 0;
+//			SprongData.SavePlayerData();
+//		}
+//	}
+	public void MuteSFX(){
 		if (SprongData.muteMusic == 0) {
 			musicSource.mute = true;
 			muteMusicButton.sprite = musicSprites[1];
@@ -134,8 +148,6 @@ public class TitleUIController : MonoBehaviour {
 			SprongData.muteMusic = 0;
 			SprongData.SavePlayerData();
 		}
-	}
-	public void MuteSFX(){
 		if (SprongData.muteSFX == 0) {
 			muteSfxButton.sprite = sfxSprites[1];
 			SprongData.muteSFX = 1;

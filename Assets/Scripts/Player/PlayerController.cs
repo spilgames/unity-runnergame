@@ -79,7 +79,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void Jump(){
 		if (grounded) {
-			jumpSound.Play();
+			if (SprongData.muteSFX == 0) {
+				jumpSound.Play();
+			}
 			playerBody.AddForce (Vector3.up * JumpSpeed,ForceMode2D.Impulse);
 			isJumping = true;
 			isKeyUpHappened = false;
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour {
 	//reset the player
 	public void ResetPlayer(){
 		anim.SetInteger ("Animal",SprongData.characterSelected);
+		anim.SetTrigger ("Reset");
 		transform.rotation = gameController.playerStartPosition.rotation;
 		playerBody.fixedAngle = true;
 		playerBody.drag = 0;
@@ -131,7 +134,9 @@ public class PlayerController : MonoBehaviour {
 		dead = true;
 		anim.SetBool ("Death",true);
 		playerBody.fixedAngle = false;
-		hitSound.Play ();
+		if (SprongData.muteSFX == 0) {
+			hitSound.Play ();
+		}
 		if (!water) {
 			playerBody.velocity = Vector2.zero;
 			if (grounded) {
