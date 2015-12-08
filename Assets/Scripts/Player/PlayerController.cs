@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour {
 
 	//reset the player
 	public void ResetPlayer(){
+		anim.SetInteger ("Animal",SprongData.characterSelected);
 		transform.rotation = gameController.playerStartPosition.rotation;
 		playerBody.fixedAngle = true;
 		playerBody.drag = 0;

@@ -19,6 +19,7 @@ public class LevelButtonController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		WorkOutButtonImage ();
+		GetComponent<Button> ().onClick.AddListener(delegate { ButtonClicked(); });
 	}
 
 	//what to do if the button is clicked
@@ -26,22 +27,23 @@ public class LevelButtonController : MonoBehaviour {
 		if (SprongData.levelsUnlocked [level - 1]) {
 			SprongData.level = level;
 			SprongData.SavePlayerData();
-			GetComponentInParent<LevelSelectController>().ToggleLevelInfo();
+			Application.LoadLevel(level);
 		}
 	}
 
 	void WorkOutButtonImage(){
 		if (SprongData.levelsUnlocked [level - 1]) {
 			buttonImage.sprite = unlockedSprite;
+			Debug.Log(PlayerPrefs.GetInt ("stars" + level, 0));
 			switch (PlayerPrefs.GetInt ("stars" + level, 0)) {
 			case 1:
-				buttonImage.sprite = starSprites [1];
+				buttonImage.sprite = starSprites [0];
 				break;
 			case 2:
-				buttonImage.sprite = starSprites [2];
+				buttonImage.sprite = starSprites [1];
 				break;
 			case 3:
-				buttonImage.sprite = starSprites [3];
+				buttonImage.sprite = starSprites [2];
 				break;
 			}
 		} else {

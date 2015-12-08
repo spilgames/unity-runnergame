@@ -41,4 +41,14 @@ public class MainUIController : MonoBehaviour {
 		Time.timeScale = 1;
 	}
 
+	public void JumpDown(){
+		GameDirectory.gameController.player.Jump ();
+	}
+
+	public void JumpUp(){
+		GameDirectory.gameController.player.JumpButtonUp ();
+	}
+
+
+
 }

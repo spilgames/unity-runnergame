@@ -61,8 +61,12 @@ public class LevelCompletePanelController : MonoBehaviour {
 		Application.LoadLevel (0);
 	}
 	
-	public void LoadLevelSelect(){
-		Application.LoadLevel ("LevelSelect");
+	public void LoadNextLevel(){
+		if (Application.loadedLevel < 24) {
+			Application.LoadLevel (Application.loadedLevel + 1);
+		} else {
+			Application.LoadLevel(0);
+		}
 	}
 
 }

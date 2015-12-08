@@ -1,4 +1,4 @@
-Android plugin path: /Users/richardelms/GameDev/unity-runnergame/Assets/Plugins/Android/
+Android plugin path: /Users/richardelms/gamedev/unity-runnergame/Assets/Plugins/Android/
 has adjust install referrer receiver?: True
 has internet permission?: True
 has wifi permission?: True
