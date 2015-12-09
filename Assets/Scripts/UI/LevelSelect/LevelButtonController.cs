@@ -34,7 +34,6 @@ public class LevelButtonController : MonoBehaviour {
 	void WorkOutButtonImage(){
 		if (SprongData.levelsUnlocked [level - 1]) {
 			buttonImage.sprite = unlockedSprite;
-			Debug.Log(PlayerPrefs.GetInt ("stars" + level, 0));
 			switch (PlayerPrefs.GetInt ("stars" + level, 0)) {
 			case 1:
 				buttonImage.sprite = starSprites [0];

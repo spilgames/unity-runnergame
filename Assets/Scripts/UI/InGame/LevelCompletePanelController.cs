@@ -26,10 +26,7 @@ public class LevelCompletePanelController : MonoBehaviour {
 	IEnumerator AddUpCoins(int earned){
 		SprongData.playerCoins += earned;
 		coinsEarnedText.text = earned.ToString () +"/"+ gameController.maximumCoinsThisLevel.ToString();
-		if(SprongData.level < SprongData.levelsUnlocked.Length){
-			SprongData.levelsUnlocked [SprongData.level] = true;
-			SprongData.SavePlayerData ();
-		}
+		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);
 		mainMenuButton.SetActive (true);
 		levelSelectButton.SetActive(true);
@@ -63,7 +60,10 @@ public class LevelCompletePanelController : MonoBehaviour {
 	
 	public void LoadNextLevel(){
 		if (Application.loadedLevel < 24) {
-			Application.LoadLevel (Application.loadedLevel + 1);
+			SprongData.level = Application.loadedLevel +1;
+			SprongData.SavePlayerData();
+			Application.LoadLevel(SprongData.level);
+
 		} else {
 			Application.LoadLevel(0);
 		}

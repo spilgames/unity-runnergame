@@ -98,7 +98,10 @@ public class GameController : MonoBehaviour {
 			levelState = LevelState.Died;
 			mainUI.UpdateUI ();
 		} else {
-
+			if(Application.loadedLevel < SprongData.levelsUnlocked.Length){
+				SprongData.levelsUnlocked[Application.loadedLevel] = true;
+			}
+			SprongData.SavePlayerData();
 			levelState = LevelState.Complete;
 			mainUI.UpdateUI();
 		}

@@ -76,6 +76,7 @@ public class SprongData : MonoBehaviour {
 		for (int i = 0; i < levelsUnlocked.Length; i++) {
 			if(PlayerPrefs.GetInt("levelsUnlocked" + i.ToString(),0) == 1){
 				levelsUnlocked[i] = true;
+				Debug.Log("UNLOCKED: " + i);
 			}
 		}
 
