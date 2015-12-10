@@ -28,6 +28,7 @@ public class LevelCompletePanelController : MonoBehaviour {
 		coinsEarnedText.text = earned.ToString () +"/"+ gameController.maximumCoinsThisLevel.ToString();
 		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);
+		SprongData.SavePlayerData();
 		mainMenuButton.SetActive (true);
 		levelSelectButton.SetActive(true);
 		retryButton.SetActive (true);
