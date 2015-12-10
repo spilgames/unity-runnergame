@@ -56,7 +56,7 @@ public class LevelCompletePanelController : MonoBehaviour {
 
 
 	public void MainMenu(){
-		Application.LoadLevel (0);
+		Application.LoadLevel ("Title");
 	}
 	
 	public void LoadNextLevel(){
@@ -66,7 +66,7 @@ public class LevelCompletePanelController : MonoBehaviour {
 			Application.LoadLevel(SprongData.level);
 
 		} else {
-			Application.LoadLevel(0);
+			Application.LoadLevel("Title");
 		}
 	}
 

@@ -42,7 +42,7 @@ public class GameOverPanelController : MonoBehaviour {
 	}
 
 	public void MainMenu(){
-		Application.LoadLevel (0);
+		Application.LoadLevel ("Title");
 	}
 
 	public void LoadLevelSelect(){
