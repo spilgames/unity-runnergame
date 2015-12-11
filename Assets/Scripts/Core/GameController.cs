@@ -41,8 +41,13 @@ public class GameController : MonoBehaviour {
 	}
 	public static LevelState levelState;
 
+	public SFXController sfx;
 
 	void Start(){
+		Dictionary<string,string> eventDetails = new Dictionary<string, string> ();
+		eventDetails.Add ("level",Application.loadedLevelName);
+		Spil.TrackEvent ("levelStart", eventDetails);
+		sfx = GameObject.Find ("SoundFX").GetComponent<SFXController>();
 		analytics = GameObject.Find ("GAv3").GetComponent<GoogleAnalyticsV3>();
 		SprongData.LoadPlayerData ();
 		GameObject[] coins = GameObject.FindGameObjectsWithTag ("Coin");
@@ -97,6 +102,9 @@ public class GameController : MonoBehaviour {
 			playerDistancePercent = ((playerDistance - levelStart.position.x) / levelLength) * 100; 
 			levelState = LevelState.Died;
 			mainUI.UpdateUI ();
+			Dictionary<string,string> eventDetails = new Dictionary<string, string> ();
+			eventDetails.Add ("level",Application.loadedLevelName);
+			Spil.TrackEvent ("playerDies", eventDetails);
 		} else {
 			if(Application.loadedLevel < SprongData.levelsUnlocked.Length){
 				SprongData.levelsUnlocked[Application.loadedLevel] = true;
@@ -104,6 +112,9 @@ public class GameController : MonoBehaviour {
 //			SprongData.SavePlayerData();
 			levelState = LevelState.Complete;
 			mainUI.UpdateUI();
+			Dictionary<string,string> eventDetails = new Dictionary<string, string> ();
+			eventDetails.Add ("level",Application.loadedLevelName);
+			Spil.TrackEvent ("levelComplete", eventDetails);
 		}
 	}
 

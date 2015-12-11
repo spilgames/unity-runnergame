@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class Coin : MonoBehaviour {
-
-	public SpriteRenderer spriteRenderer;
-
+	
 	void OnTriggerEnter2D(Collider2D coll){
 		if(coll.gameObject.tag == "Player"){
 			KillCoin();
@@ -13,6 +11,7 @@ public class Coin : MonoBehaviour {
 
 	void KillCoin(){
 		GameDirectory.gameController.coinsCollectedThisRun ++;
+		GameDirectory.gameController.sfx.PlayCoinSound ();
 		PoolingController.PlayCoinFX (transform.position);
 		gameObject.SetActive (false);
 	}

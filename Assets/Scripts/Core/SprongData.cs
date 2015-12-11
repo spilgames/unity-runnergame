@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class SprongData : MonoBehaviour {
 
 	//the players coins
@@ -24,6 +24,10 @@ public class SprongData : MonoBehaviour {
 
 	//save all the player data
 	public static void SavePlayerData(){
+		Dictionary<string,string> eventDetails = new Dictionary<string, string> ();
+		eventDetails.Add ("walletValue",playerCoins.ToString());
+		Spil.TrackEvent ("walletUpdate", eventDetails);
+
 		//save the sound options
 		PlayerPrefs.SetInt ("muteMusic", muteMusic);
 		PlayerPrefs.SetInt ("muteSFX", muteSFX);
