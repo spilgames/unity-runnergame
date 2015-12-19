@@ -36,20 +36,25 @@ extern "C" {
 @interface UnityAdsUnityWrapper () <UnityAdsDelegate>
 @property (nonatomic, strong) NSString* gameObjectName;
 @property (nonatomic, strong) NSString* gameId;
+@property (nonatomic, assign) BOOL appSelectorActive;
+@property (nonatomic, assign) BOOL videoPlaying;
 @end
 
 @implementation UnityAdsUnityWrapper
 
-- (id)initWithGameId:(NSString*)gameId testModeOn:(bool)testMode debugModeOn:(bool)debugMode withGameObjectName:(NSString*)gameObjectName {
+- (id)initWithGameId:(NSString*)gameId testModeOn:(bool)testMode debugModeOn:(bool)debugMode withGameObjectName:(NSString*)gameObjectName withUnityVersion:(NSString*)unityVersion {
   self = [super init];
   
   if (self != nil) {
     self.gameObjectName = gameObjectName;
     self.gameId = gameId;
+    self.appSelectorActive = false;
+    self.videoPlaying = false;
     
     [[UnityAds sharedInstance] setDelegate:self];
     [[UnityAds sharedInstance] setDebugMode:debugMode];
     [[UnityAds sharedInstance] setTestMode:testMode];
+    [[UnityAds sharedInstance] setUnityVersion:unityVersion];
     [[UnityAds sharedInstance] startWithGameId:gameId andViewController:UnityGetGLViewController()];
   }
   
@@ -57,11 +62,14 @@ extern "C" {
 }
 
 - (void)unityAdsVideoCompleted:(NSString *)rewardItemKey skipped:(BOOL)skipped {
+  self.videoPlaying = false;
   NSString *parameters = [NSString stringWithFormat:@"%@;%@", rewardItemKey, skipped ? @"true" : @"false"];
   UnitySendMessage(UnityAdsMakeStringCopy([self.gameObjectName UTF8String]), "onVideoCompleted", [parameters UTF8String]);
 }
 
 - (void)unityAdsWillShow {
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:[UIApplication sharedApplication]];
 }
 
 - (void)unityAdsDidShow {
@@ -77,18 +85,22 @@ extern "C" {
 }
 
 - (void)unityAdsDidHide {
+  self.videoPlaying = false;
 #if UNITY_VERSION >= 500
   UnityPause(0);
 #else
   UnityPause(false);
 #endif
   UnitySendMessage(UnityAdsMakeStringCopy([self.gameObjectName UTF8String]), "onHide", "");
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)unityAdsWillLeaveApplication {
 }
 
 - (void)unityAdsVideoStarted {
+  self.videoPlaying = true;
   UnitySendMessage(UnityAdsMakeStringCopy([self.gameObjectName UTF8String]), "onVideoStarted", "");
 }
 
@@ -100,11 +112,24 @@ extern "C" {
   UnitySendMessage(UnityAdsMakeStringCopy([self.gameObjectName UTF8String]), "onFetchFailed", "");
 }
 
+- (void)didBecomeActive:(NSNotification*)notification {
+  if(self.appSelectorActive && self.videoPlaying) {
+    [[UnityAds sharedInstance] hide];
+    if([[UnityAds sharedInstance] respondsToSelector:@selector(refreshAds)]) {
+      [[UnityAds sharedInstance] performSelector:@selector(refreshAds)];
+    }
+  }
+  self.appSelectorActive = false;
+}
+
+- (void)willResignActive:(NSNotification*)notification {
+  self.appSelectorActive = true;
+}
 
 extern "C" {
-  void UnityAdsInit (const char *gameId, bool testMode, bool debugMode, const char *gameObjectName) {
+  void UnityAdsInit (const char *gameId, bool testMode, bool debugMode, const char *gameObjectName, const char* unityVersion) {
     if (unityAds == NULL) {
-      unityAds = [[UnityAdsUnityWrapper alloc] initWithGameId:UnityAdsCreateNSString(gameId) testModeOn:testMode debugModeOn:debugMode withGameObjectName:UnityAdsCreateNSString(gameObjectName)];
+      unityAds = [[UnityAdsUnityWrapper alloc] initWithGameId:UnityAdsCreateNSString(gameId) testModeOn:testMode debugModeOn:debugMode withGameObjectName:UnityAdsCreateNSString(gameObjectName) withUnityVersion:UnityAdsCreateNSString(unityVersion)];
     }
   }
 

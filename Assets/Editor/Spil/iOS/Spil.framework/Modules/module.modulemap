@@ -1,0 +1,6 @@
+framework module Spil {
+  umbrella header "Spil.h"
+
+  export *
+  module * { export * }
+}

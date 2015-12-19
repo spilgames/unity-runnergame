@@ -62,8 +62,8 @@ public class GoogleAnalyticsV3 : MonoBehaviour {
   public int dispatchPeriod = 5;
 
   [RangedTooltip("The sample rate to use. Only required for Android and" +
-      " iOS.", 0, 100)]
-  public int sampleFrequency = 100;
+      " iOS.", 0F, 100F)]
+  public float sampleFrequency = 100.0F;
 
   [Tooltip("The log level. Default is WARNING.")]
   public DebugMode logLevel = DebugMode.WARNING;
@@ -110,51 +110,39 @@ public class GoogleAnalyticsV3 : MonoBehaviour {
   private GoogleAnalyticsMPV3 mpTracker = new GoogleAnalyticsMPV3();
 #endif
 
-
-
-  public void StartAnalytics() {
-
-
-
-	InitializeTracker ();
+  void Awake() {
+    InitializeTracker ();
 
     if (sendLaunchEvent) {
-      LogEvent("Google Analytics", "Auto Instrumentation", "Game Launch", 0);
-    }
+  		LogEvent("Google Analytics", "Auto Instrumentation", "Game Launch", 0);
+  	}
 
-    if (UncaughtExceptionReporting) {
-#if UNITY_5_0
-      Application.logMessageReceived += HandleException;
-#else
-      Application.RegisterLogCallback (HandleException);
-#endif
-      if (GoogleAnalyticsV3.belowThreshold(logLevel, GoogleAnalyticsV3.DebugMode.VERBOSE)) {
-        Debug.Log("Enabling uncaught exception reporting.");
-      }
-    }
+  	if (UncaughtExceptionReporting) {
+  		Application.RegisterLogCallback (HandleException);
+  		if (GoogleAnalyticsV3.belowThreshold (logLevel, GoogleAnalyticsV3.DebugMode.VERBOSE)) {
+  			Debug.Log ("Enabling uncaught exception reporting.");
+  		}
+  	}
   }
 
-  void Update() {
-    if (uncaughtExceptionStackTrace != null) {
-      LogException(uncaughtExceptionStackTrace, true);
-      uncaughtExceptionStackTrace = null;
-    }
-  }
+	void Update() {
+		if (uncaughtExceptionStackTrace != null) {
+			LogException (uncaughtExceptionStackTrace, true);
+			uncaughtExceptionStackTrace = null;
+		}
+	}
 
-  private void HandleException(string condition, string stackTrace, LogType type) {
-    if (type == LogType.Exception) {
-      uncaughtExceptionStackTrace = condition + "\n" + stackTrace
+	private void HandleException(string condition, string stackTrace, LogType type) {
+		if (type == LogType.Exception) {
+			uncaughtExceptionStackTrace = condition + "\n" + stackTrace
           + UnityEngine.StackTraceUtility.ExtractStackTrace();
-    }
-  }
+		}
+	}
 
   // TODO: Error checking on initialization parameters
   private void InitializeTracker() {
     if (!initialized) {
       instance = this;
-
-      DontDestroyOnLoad(instance);
-
       Debug.Log("Initializing Google Analytics 0.1.");
 #if UNITY_ANDROID && !UNITY_EDITOR
       androidTracker.SetTrackingCode(androidTrackingCode);

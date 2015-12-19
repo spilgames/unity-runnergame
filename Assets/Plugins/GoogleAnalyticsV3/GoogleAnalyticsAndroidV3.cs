@@ -31,7 +31,7 @@ public class GoogleAnalyticsAndroidV3 : IDisposable {
   private string appName;
   private string bundleIdentifier;
   private int dispatchPeriod;
-  private int sampleFrequency;
+  private float sampleFrequency;
   private GoogleAnalyticsV3.DebugMode logLevel;
   private bool anonymizeIP;
   private bool dryRun;
@@ -89,7 +89,7 @@ public class GoogleAnalyticsAndroidV3 : IDisposable {
     tracker.Call(GoogleAnalyticsV3.SET, args);
   }
 
-  public void SetSampleFrequency(int sampleFrequency) {
+  public void SetSampleFrequency(float sampleFrequency) {
     this.sampleFrequency = sampleFrequency;
   }
 

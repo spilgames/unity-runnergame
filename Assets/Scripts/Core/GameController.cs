@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 public class GameController : MonoBehaviour {
-	
-	public GoogleAnalyticsV3 analytics;
 
 	//speed that the platforms move
 
@@ -48,7 +46,6 @@ public class GameController : MonoBehaviour {
 		eventDetails.Add ("level",Application.loadedLevelName);
 		Spil.TrackEvent ("levelStart", eventDetails);
 		sfx = GameObject.Find ("SoundFX").GetComponent<SFXController>();
-		analytics = GameObject.Find ("GAv3").GetComponent<GoogleAnalyticsV3>();
 		SprongData.LoadPlayerData ();
 		GameObject[] coins = GameObject.FindGameObjectsWithTag ("Coin");
 		for (int i = 0; i < coins.Length; i++) {
@@ -69,7 +66,6 @@ public class GameController : MonoBehaviour {
 		//activate the correct UI panel
 		mainUI.UpdateUI ();
 		NewGame ();
-		analytics.LogScreen (Application.loadedLevelName);
 	}
 
 	public void NewGame(){

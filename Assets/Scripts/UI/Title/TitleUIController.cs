@@ -22,7 +22,6 @@ public class TitleUIController : MonoBehaviour {
 	public Image muteSfxButton;
 	public Sprite[] musicSprites;
 	public Sprite[] sfxSprites;
-	public AudioSource musicSource;
 
 	//the levelslectUIcontroller
 	public LevelSelectController levelSelectController;
@@ -30,10 +29,10 @@ public class TitleUIController : MonoBehaviour {
 	void Awake(){
 		SprongData.LoadPlayerData ();
 		if (SprongData.muteMusic == 1) {
-			musicSource.mute = true;
+			GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
 			muteMusicButton.sprite = musicSprites [1];
 		} else {
-			musicSource.Play();
+			GameObject.Find("Music").GetComponent<AudioSource>().Play();
 		}
 		if(SprongData.muteSFX == 1){
 			muteSfxButton.sprite = sfxSprites[1];
@@ -137,13 +136,13 @@ public class TitleUIController : MonoBehaviour {
 //	}
 	public void MuteSFX(){
 		if (SprongData.muteMusic == 0) {
-			musicSource.mute = true;
+			GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
 			muteMusicButton.sprite = musicSprites[1];
 			SprongData.muteMusic = 1;
 			SprongData.SavePlayerData();
 		} else {
-			musicSource.mute = false;
-			musicSource.Play();
+			GameObject.Find("Music").GetComponent<AudioSource>().mute = false;
+			GameObject.Find("Music").GetComponent<AudioSource>().Play();
 			muteMusicButton.sprite = musicSprites[0];
 			SprongData.muteMusic = 0;
 			SprongData.SavePlayerData();

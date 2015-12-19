@@ -6,12 +6,12 @@ namespace UnityEngine.Advertisements {
   using System.Collections.Generic;
 
   internal class UnityAdsIos : UnityAdsPlatform {
-	public override void init (string gameId, bool testModeEnabled, string gameObjectName) {
+	public override void init (string gameId, bool testModeEnabled, string gameObjectName, string unityVersion) {
 		if(Advertisement.UnityDeveloperInternalTestMode) {
 			UnityAdsIosBridge.UnityAdsEnableUnityDeveloperInternalTestMode();
 		}
 
-		UnityAdsIosBridge.UnityAdsInit(gameId, testModeEnabled, (Advertisement.debugLevel & Advertisement.DebugLevel.DEBUG) != Advertisement.DebugLevel.NONE ? true : false, gameObjectName);
+		UnityAdsIosBridge.UnityAdsInit(gameId, testModeEnabled, (Advertisement.debugLevel & Advertisement.DebugLevel.Debug) != Advertisement.DebugLevel.None ? true : false, gameObjectName, unityVersion);
 	}
 		
 	public override bool show (string zoneId, string rewardItemKey, string options) {
@@ -71,7 +71,7 @@ namespace UnityEngine.Advertisements {
 	}
 
 	public override void setLogLevel(Advertisement.DebugLevel logLevel) {
-		UnityAdsIosBridge.UnityAdsSetDebugMode((Advertisement.debugLevel & Advertisement.DebugLevel.DEBUG) != Advertisement.DebugLevel.NONE ? true : false);
+		UnityAdsIosBridge.UnityAdsSetDebugMode((Advertisement.debugLevel & Advertisement.DebugLevel.Debug) != Advertisement.DebugLevel.None ? true : false);
 	}
   }
 }

@@ -7,7 +7,7 @@ namespace UnityEngine.Advertisements {
 
 	internal static class UnityAdsIosBridge {
 		[DllImport ("__Internal")]
-		public static extern void UnityAdsInit (string gameId, bool testModeEnabled, bool debugModeEnabled, string gameObjectName);
+		public static extern void UnityAdsInit (string gameId, bool testModeEnabled, bool debugModeEnabled, string gameObjectName, string unityVersion);
 		
 		[DllImport ("__Internal")]
 		public static extern bool UnityAdsShow (string zoneId, string rewardItemKey, string options);
