@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+using System.Collections.Generic;
 public class CharacterSelectController : MonoBehaviour {
-	
+
+	bool wasMuted;
+
 	//the animal buttons 
 	public Image[] buttons;
 
@@ -38,6 +40,10 @@ public class CharacterSelectController : MonoBehaviour {
 	public GameObject characternotificationObject;
 
 	void Start(){
+		if (SprongData.muteMusic == 1) {
+			wasMuted = true;
+		}
+		rewardedButton.SetActive (true);
 		CheckForCharacterNotification ();
 	}
 
@@ -54,6 +60,9 @@ public class CharacterSelectController : MonoBehaviour {
 
 	//reset stuff 
 	public void CloseCharacterSelect(){
+		if(!wasMuted){
+			GameObject.Find("Music").GetComponent<AudioSource>().mute = false;
+		}
 		CheckForCharacterNotification ();
 		rewardedButton.SetActive(false);
 		StopCoroutine ("CheckForRewardedAd");
@@ -85,7 +94,7 @@ public class CharacterSelectController : MonoBehaviour {
 	void CheckForCharacterNotification(){
 		int amount = 0;
 		for (int i = 0; i < SprongData.charactersUnlocked.Length; i ++) {
-			if (!SprongData.charactersUnlocked [i] && SprongData.playerCoins >= i * 100) {
+			if (!SprongData.charactersUnlocked [i] && SprongData.playerCoins >= i * SprongData.characterCostModifier) {
 				characternotificationObject.SetActive (true);
 				amount ++;
 			}
@@ -94,15 +103,6 @@ public class CharacterSelectController : MonoBehaviour {
 			characternotificationObject.SetActive (false);
 		} else {
 			characternotificationNumber.text = amount.ToString ();
-		}
-	}
-	//check for a rewarded video
-	IEnumerator CheckForRewardedAd(){
-		yield return new WaitForSeconds (1);
-		if (Advertisement.isReady ("rewardedVideoZone")) {
-			rewardedButton.SetActive (true);
-		} else {
-			StartCoroutine("CheckForRewardedAd");
 		}
 	}
 
@@ -121,19 +121,13 @@ public class CharacterSelectController : MonoBehaviour {
 	
 	//play the AD
 	public void WatchVideo(){
-		Advertisement.Show("rewardedVideoZone", new ShowOptions {
-			pause = true,
-			resultCallback = result => {
-				if(result == ShowResult.Finished){
-					RewardPlayer();
-				}
-			}
-		});
+		GameObject.Find("Music").GetComponent<AudioSource>().mute = true;
+		Spil.ShowRewardedVideo ();
 	}
 
 	//unlock a character
 	public void UnlockCharacter(int characterNumber){
-		int cost = characterNumber * 100;
+		int cost = characterNumber * SprongData.characterCostModifier;
 		//if the player has enough coins
 		if (SprongData.playerCoins >= cost) {
 			characterToUnlock = characterNumber;
@@ -158,7 +152,16 @@ public class CharacterSelectController : MonoBehaviour {
 
 	//confirm and unlock the character
 	public void ConfirmUnlock(){
-		int cost = characterToUnlock * 100;
+		int cost = characterToUnlock * SprongData.characterCostModifier;
+
+		Dictionary<string,string> eventDetails = new Dictionary<string, string> ();
+		eventDetails.Add ("walletValue",SprongData.playerCoins.ToString());
+		eventDetails.Add ("itemValue",cost.ToString());
+		eventDetails.Add ("source","0");
+		eventDetails.Add ("item","inGameCoins");
+		eventDetails.Add ("category","0");
+		Spil.TrackEvent ("walletUpdate", eventDetails);
+
 		//deduct the coins
 		SprongData.playerCoins -= cost;
 		//unlock the character
@@ -172,9 +175,7 @@ public class CharacterSelectController : MonoBehaviour {
 		CloseConfirm ();
 		SetSpotlight ();
 	}
-	
-	
-	
+
 	//select a character
 	public void SelectCharacter(int character){
 		if (SprongData.charactersUnlocked [character]) {
@@ -182,17 +183,5 @@ public class CharacterSelectController : MonoBehaviour {
 			SprongData.SavePlayerData ();
 			SetSpotlight ();
 		}
-	}
-
-	//reward the player after watching an AD
-	public void RewardPlayer(){
-		RewardedSuccessPanel.SetActive(true);
-		SprongData.playerCoins += 500;
-		StartCoroutine ("CheckForRewardedAd");
-		SprongData.SavePlayerData ();
-	}
-
-	public void CloseRewardedSuccessPanel(){
-		RewardedSuccessPanel.SetActive(false);
 	}
 }

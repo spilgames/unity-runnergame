@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 public class LevelCompletePanelController : MonoBehaviour {
 
 	public GameController gameController;
@@ -25,6 +25,15 @@ public class LevelCompletePanelController : MonoBehaviour {
 
 	IEnumerator AddUpCoins(int earned){
 		SprongData.playerCoins += earned;
+
+		Dictionary<string,string> eventDetails = new Dictionary<string, string> ();
+		eventDetails.Add ("walletValue",SprongData.playerCoins.ToString());
+		eventDetails.Add ("itemValue",earned.ToString());
+		eventDetails.Add ("source","0");
+		eventDetails.Add ("item","inGameCoins");
+		eventDetails.Add ("category","0");
+		Spil.TrackEvent ("walletUpdate", eventDetails);
+
 		coinsEarnedText.text = earned.ToString () +"/"+ gameController.maximumCoinsThisLevel.ToString();
 		SprongData.SavePlayerData ();
 		yield return new WaitForSeconds(1);

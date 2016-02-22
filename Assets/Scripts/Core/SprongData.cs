@@ -6,6 +6,9 @@ public class SprongData : MonoBehaviour {
 	//the players coins
 	public static int playerCoins;
 
+	//the cost amount modifier
+	public static int characterCostModifier = 100;
+
 	//the unlocked characters
 	public static bool[] charactersUnlocked = new bool[28];
 
@@ -24,9 +27,6 @@ public class SprongData : MonoBehaviour {
 
 	//save all the player data
 	public static void SavePlayerData(){
-		Dictionary<string,string> eventDetails = new Dictionary<string, string> ();
-		eventDetails.Add ("walletValue",playerCoins.ToString());
-		Spil.TrackEvent ("walletUpdate", eventDetails);
 
 		//save the sound options
 		PlayerPrefs.SetInt ("muteMusic", muteMusic);

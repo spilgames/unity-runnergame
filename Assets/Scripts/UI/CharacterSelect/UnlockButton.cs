@@ -10,7 +10,7 @@ public class UnlockButton : MonoBehaviour {
 
 	void Start(){
 		costText = GetComponentInChildren<Text> ();
-		costText.text = (characterNumber * 100).ToString ();
+		costText.text = (characterNumber * SprongData.characterCostModifier).ToString ();
 	}
 
 

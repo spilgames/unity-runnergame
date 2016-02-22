@@ -14,6 +14,8 @@ using NotificationServices = UnityEngine.NotificationServices;
 
 public class Spil : MonoBehaviour {
 
+
+
 	//get your project id from your representative 
 	public string project_ID = "127433475057";
 
@@ -379,13 +381,9 @@ public class Spil : MonoBehaviour {
 	
 
 	void OnReward(JSONObject rewardData){
-		
-		//Reward the player, for example:
-
-		//JSONObject eventData = rewardData.GetField ("eventData");
-
-		//playerCoins += int.Parse (eventData.GetField("reward").str);
-
+		JSONObject eventData = rewardData.GetField ("eventData");
+		SprongData.playerCoins += int.Parse (eventData.GetField("reward").str);
+		SprongData.SavePlayerData ();
 	}
 	
 	

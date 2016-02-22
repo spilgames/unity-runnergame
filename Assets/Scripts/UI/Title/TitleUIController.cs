@@ -40,12 +40,8 @@ public class TitleUIController : MonoBehaviour {
 	}
 
 	void Start(){
-		InitUnityAds ();
-		//load the status of unlocks so far
-
 		//make sure that at least the fist character is unlocked
 		SprongData.charactersUnlocked [0] = true;
-
 	}
 
 	void Update(){
@@ -53,16 +49,6 @@ public class TitleUIController : MonoBehaviour {
 			PlayerPrefs.DeleteAll();
 			Debug.Log("PlayerPrefsCleared");
 		}
-	}
-	
-	//init the unity ads sdk
-	void InitUnityAds(){
-		#if UNITY_ANDROID
-		Advertisement.Initialize (unityAdsAndroid);
-		#endif
-		#if UNITY_IOS
-		Advertisement.Initialize (unityAdsIos);
-		#endif
 	}
 
 	//load the character select panel
